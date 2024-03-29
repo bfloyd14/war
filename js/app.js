@@ -1,5 +1,5 @@
 /*------------------ Constants -----------------------*/
-// const cardDeck
+// const allCards
 // Include values of each card within War rules
 
 
@@ -38,6 +38,11 @@ let winner, war, doubleWar, choseCountry
 // 8) Create a score display for each player keeping track of cards won
 
 /*------------------- Functions ----------------------*/
+init()
+
+function init(){
+
+}
 // 3) Upon loading, the game state should be initialized, and a function should be 
 //    called to render this game state
 // Call a function named init upon loading of game
