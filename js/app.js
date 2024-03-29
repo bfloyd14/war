@@ -5,10 +5,15 @@
 
 /*----------------- Variables ---------------------*/
 // Use a variable named playerCardDeck to keep track of cards won
+let playerCardDeck = []
 // Use a variable named computerCardDeck to keep track of cards won
+let computerCardDeck = []
 // Use a variable name playerUnusedCardDeck to keep track of cards remaining to be played
+let playerUnusedCardDeck 
 // Use a variable named computerUnusedCardDeck  to keep track of cards remaining to be played
+let computerUnusedCardDeck
 // Use a variable named checkForWinner to check for a victory when opponent has ran out of cards
+let winner, war, doubleWar, choseCountry
 // Use a variable named war to deploy when player 1 & player 2 turn over same card
 // Use a variable named doubleWar to represent when war has resulted in drawing the same card
 // Use a variable name playerCountry to determine which civilization is chosen
