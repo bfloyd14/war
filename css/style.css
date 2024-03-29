@@ -17,6 +17,11 @@ nav {
   margin-bottom: 24px;
 }
 
+img {
+  width: 10%;
+  max-height: 10% ;
+}
+
 .play-button-container {
   display: flex;
   align-items: center;
@@ -25,5 +30,5 @@ nav {
 
 playCardBtn{
   border-radius: 4px;
-  background-color:
+  background-color: gray
 }
