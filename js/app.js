@@ -33,8 +33,7 @@ let winner, war, doubleWar, choseCountry
 const messageEl = document.getElementById('message')
 const playBtnContainer = document.querySelector('.play-button-container')
 const resetBtnContainer = document.querySelector('.reset-button-container')
-
-
+const resetBtn = document.getElementById('reset')
 
 // const playerActiveCard to keep track of the card that is played by the player
 // const computerActiveCard to keep track of the card that is played by computer
@@ -42,7 +41,8 @@ const resetBtnContainer = document.querySelector('.reset-button-container')
 
 /*----------------- Event Listeners -------------------*/
 // 6) Handle a player clicking a card deck with a `handleClick` function
-playBtn.addEventListener('click', handlePlayClick)
+playBtnContainer.addEventListener('click', handlePlayClick)
+resetBtn.addEventListener('click', handleReset)
 // When a user clicks on their card deck, the player and the computer play their next card for their respective card decks.  
 // Create a Surrender (reset) button that shuffles the 56 card deck and deals out 28 cards to each player
 // 8) Create a score display for each player keeping track of cards won
@@ -56,7 +56,14 @@ function init(){
 }
 
 function handlePlayClick(evt){
-  console.log(event.target.id)
+  console.log(evt.target.id)
+  gameIsInPlay = true
+  render()
+}
+
+function handleReset(){
+  gameIsInPlay = false
+  render() 
 }
 
 function render(){
