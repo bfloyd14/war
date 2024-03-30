@@ -1,5 +1,7 @@
 /*------------------ Constants -----------------------*/
 // const allCards
+const allCards = ["dA","dK","dQ","dJ","d10","d09","d08","d07","d06","d05","d04","d03","d02","hA","hK","hQ","hJ","h10","h09","h08","h07","h06","h05","h04","h03","h02","cA","cK","cQ","cJ","c10","c09","c08","c07","c06","c05","c04","c03","c02","sA","sK","sQ","sJ","s10","s09","s08","s07","s06","s05","s04","s03","s02"]
+
 // Include values of each card within War rules
 
 
@@ -27,6 +29,9 @@ let winner, war, doubleWar, choseCountry
 /*------------ Cached Element References -----------*/
 // const reset button for AAU to reset the game
 // const message to display updated message throughout the game
+const messageEl = document.getElementById('message')
+const playBtn = document.querySelector('.play-button-container')
+
 // const playerActiveCard to keep track of the card that is played by the player
 // const computerActiveCard to keep track of the card that is played by computer
 
