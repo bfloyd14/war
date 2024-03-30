@@ -6,6 +6,7 @@ const allCards = ["dA","dK","dQ","dJ","d10","d09","d08","d07","d06","d05","d04",
 
 
 /*----------------- Variables ---------------------*/
+let gameIsInPlay
 // Use a variable named playerCardDeck to keep track of cards won
 let playerCardDeck = []
 // Use a variable named computerCardDeck to keep track of cards won
@@ -38,6 +39,7 @@ const playBtn = document.querySelector('.play-button-container')
 
 /*----------------- Event Listeners -------------------*/
 // 6) Handle a player clicking a card deck with a `handleClick` function
+playBtn.addEventListener('click', handlePlayClick)
 // When a user clicks on their card deck, the player and the computer play their next card for their respective card decks.  
 // Create a Surrender (reset) button that shuffles the 56 card deck and deals out 28 cards to each player
 // 8) Create a score display for each player keeping track of cards won
@@ -46,7 +48,20 @@ const playBtn = document.querySelector('.play-button-container')
 init()
 
 function init(){
+  gameIsInPlay = false
+  render()
+}
 
+function handlePlayClick(evt){
+  console.log(event.target.id)
+}
+
+function render(){
+  if(gameIsInPlay){
+
+  } else {
+    
+  }
 }
 // 3) Upon loading, the game state should be initialized, and a function should be 
 //    called to render this game state
