@@ -31,7 +31,10 @@ let winner, war, doubleWar, choseCountry
 // const reset button for AAU to reset the game
 // const message to display updated message throughout the game
 const messageEl = document.getElementById('message')
-const playBtn = document.querySelector('.play-button-container')
+const playBtnContainer = document.querySelector('.play-button-container')
+const resetBtnContainer = document.querySelector('.reset-button-container')
+
+
 
 // const playerActiveCard to keep track of the card that is played by the player
 // const computerActiveCard to keep track of the card that is played by computer
@@ -58,9 +61,9 @@ function handlePlayClick(evt){
 
 function render(){
   if(gameIsInPlay){
-
+    resetBtnContainer.style.display = ''
   } else {
-    
+    resetBtnContainer.style.display = 'none'
   }
 }
 // 3) Upon loading, the game state should be initialized, and a function should be 
