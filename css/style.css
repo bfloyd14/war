@@ -22,7 +22,11 @@ nav > img {
 }
 
 h1 {
-  font-size: 24px;
+  font-size: 48px;
+}
+
+#message {
+  font-size: 28px;
 }
 
 .card-container {
@@ -30,17 +34,21 @@ h1 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  padding: 40px;
 }
 
 .play-button-container {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-playCardBtn{
+#playCardBtn{
   border-radius: 4px;
   background-color: gray
+  cursor: pointer;
+}
+
+#reset{
+  cursor: pointer;
 }
