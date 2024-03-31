@@ -19,6 +19,7 @@ let computerUnusedCardDeck
 let winner, war, doubleWar, choseCountry
 // Use a variable named war to deploy when player 1 & player 2 turn over same card
 // Use a variable named doubleWar to represent when war has resulted in drawing the same card
+let gameDeck = []
 // Use a variable name playerCountry to determine which civilization is chosen
 // Stretch goal - have a drop down box to pick a country
 // Default country would be Vikings
@@ -53,16 +54,50 @@ init()
 
 function init(){
   gameIsInPlay = false
+  gameDeck = []
   render()
 }
 
+function setMesage(message){
+  messageEl.textContent = message
+}
+
 function handleStart(evt){
-  console.log(evt.target.id)
-  gameIsInPlay = false
+  gameDeck = generateDeck(evt.target.id)
+  playerCardDeck = playerShuffleCards
+  computerCardDeck = computerShuffleCards 
+  gameIsInPlay = true
+  render()
+}
+
+function shuffleCards(cards){
+  console.log(computerShuffleCards)
+  let cardsToShuffle = allCards
+  let numTimesToShuffle = cardsToShuffle.length
+  let shuffleCards= []
+  for (i=0; i < numTimesToShuffle; i++){
+    let randIdx = Math.floor(Math.random()* cardsToShuffle.length)
+    shuffleCards.push(cardsToShuffle.splice(randIdx, 1)[0])
+    console.log(shuffleCards)
+  }
+    return shuffleCards
+}
+
+function generateDeck(cards){
+  let cardsToAdd = allCards[cards]
+  let deckCopy = [...allcards]
+  let playerCardsToAdd = []
+  let computerCardsToAdd= []
+  for(let i = 1; i <= cardsToAdd; i++){
+    let randIdx = Math.floor(Math.random() * deckCopy.length)
+    let cardToAdd = deckCopy.splice(randIdx,1)
+    playerCardsToAdd.push(cardToAdd)
+    computerCardsToAdd.push(cardToAdd)
+  }
 }
 
 function handlePlayClick(evt){
-  console.log(evt.target.id)
+  startBtnContainer(evt)
   gameIsInPlay = true
   render()
 }
@@ -74,13 +109,13 @@ function handleReset(){
 
 function render(){
   if(gameIsInPlay){
+    startBtnContainer.style.display = ''
+    resetBtnContainer.style.display = 'none'
+    playBtnContainer.style.display = 'none'
+  } else {
     resetBtnContainer.style.display = ''
     playBtnContainer.style.display = ''
     startBtnContainer.style.display = 'none'
-  } else {
-    resetBtnContainer.style.display = 'none'
-    playBtnContainer.style.display = 'none'
-    startBtnContainer.style.display = ''
   }
 }
 // 3) Upon loading, the game state should be initialized, and a function should be 
