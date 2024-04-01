@@ -3,23 +3,22 @@
 const allCards = ["dA","dK","dQ","dJ","d10","d09","d08","d07","d06","d05","d04","d03","d02","hA","hK","hQ","hJ","h10","h09","h08","h07","h06","h05","h04","h03","h02","cA","cK","cQ","cJ","c10","c09","c08","c07","c06","c05","c04","c03","c02","sA","sK","sQ","sJ","s10","s09","s08","s07","s06","s05","s04","s03","s02"]
 
 // Include values of each card within War rules
-
+const dealtCards = 26
 
 /*----------------- Variables ---------------------*/
 let gameIsInPlay
 // Use a variable named playerCardDeck to keep track of cards won
-let playerCardDeck = []
+let playerHand = []
 // Use a variable named computerCardDeck to keep track of cards won
-let computerCardDeck = []
+let computerHand = []
 // Use a variable name playerUnusedCardDeck to keep track of cards remaining to be played
-let playerUnusedCardDeck 
+let playerWinPile = []
 // Use a variable named computerUnusedCardDeck  to keep track of cards remaining to be played
-let computerUnusedCardDeck
+let computerWinPile = []
 // Use a variable named checkForWinner to check for a victory when opponent has ran out of cards
-let winner, war, doubleWar, choseCountry
+let checkForWinner, war, doubleWar, choseCountry
 // Use a variable named war to deploy when player 1 & player 2 turn over same card
 // Use a variable named doubleWar to represent when war has resulted in drawing the same card
-let gameDeck = []
 // Use a variable name playerCountry to determine which civilization is chosen
 // Stretch goal - have a drop down box to pick a country
 // Default country would be Vikings
@@ -43,8 +42,8 @@ const startBtnContainer = document.querySelector('.start-button-container')
 /*----------------- Event Listeners -------------------*/
 // 6) Handle a player clicking a card deck with a `handleClick` function
 playBtnContainer.addEventListener('click', handlePlayClick)
-resetBtn.addEventListener('click', handleReset)
-startBtnContainer.addEventListener('click', handleStart)
+resetBtn.addEventListener('click', init)
+// startBtn.addEventListener('click', handleStart)
 // When a user clicks on their card deck, the player and the computer play their next card for their respective card decks.  
 // Create a Surrender (reset) button that shuffles the 56 card deck and deals out 28 cards to each player
 // 8) Create a score display for each player keeping track of cards won
@@ -54,68 +53,68 @@ init()
 
 function init(){
   gameIsInPlay = false
-  gameDeck = []
+  playerHand = []
+  computerHand = []
+  generateDecks()
   render()
 }
+console.log(playerHand)
+console.log(computerHand)
 
-function setMesage(message){
+function setMessage(message){
   messageEl.textContent = message
 }
 
 function handleStart(evt){
   gameDeck = generateDeck(evt.target.id)
-  playerCardDeck = playerShuffleCards
-  computerCardDeck = computerShuffleCards 
+  shuffleCards ()
   gameIsInPlay = true
   render()
 }
 
-function shuffleCards(cards){
-  console.log(computerShuffleCards)
-  let cardsToShuffle = allCards
-  let numTimesToShuffle = cardsToShuffle.length
-  let shuffleCards= []
-  for (i=0; i < numTimesToShuffle; i++){
-    let randIdx = Math.floor(Math.random()* cardsToShuffle.length)
-    shuffleCards.push(cardsToShuffle.splice(randIdx, 1)[0])
-    console.log(shuffleCards)
-  }
-    return shuffleCards
-}
-
-function generateDeck(cards){
-  let cardsToAdd = allCards[cards]
-  let deckCopy = [...allcards]
+function generateDecks(){
+  let deckCopy = [...allCards]
   let playerCardsToAdd = []
   let computerCardsToAdd= []
-  for(let i = 1; i <= cardsToAdd; i++){
+  for(let i = 0; i < 52; i++){
     let randIdx = Math.floor(Math.random() * deckCopy.length)
-    let cardToAdd = deckCopy.splice(randIdx,1)
-    playerCardsToAdd.push(cardToAdd)
+    let cardToAdd = deckCopy.splice(randIdx, 1)
+    if(randIdx % 2){
+      playerCardsToAdd.push(cardToAdd)
+  } else {
     computerCardsToAdd.push(cardToAdd)
+    } 
   }
+  playerHand = shuffleCards(playerCardsToAdd)
+  computerHand = shuffleCards(computerCardsToAdd)
 }
+
+function shuffleCards(cards){
+  let shuffledCards = []
+  for (i=0; i < 26; i++){
+    let randIdx = Math.floor(Math.random()* cards.length)
+    shuffledCards.push(cards.splice(randIdx, 1))
+  }
+    return shuffledCards
+}
+
 
 function handlePlayClick(evt){
   startBtnContainer(evt)
   gameIsInPlay = true
   render()
 }
-
-function handleReset(){
-  gameIsInPlay = false
-  render() 
-}
+console.log(startBtnContainer)
 
 function render(){
   if(gameIsInPlay){
-    startBtnContainer.style.display = ''
-    resetBtnContainer.style.display = 'none'
-    playBtnContainer.style.display = 'none'
-  } else {
+    startBtnContainer.style.display = 'none'
     resetBtnContainer.style.display = ''
     playBtnContainer.style.display = ''
-    startBtnContainer.style.display = 'none'
+  } else {
+    resetBtnContainer.style.display = 'none'
+    playBtnContainer.style.display = 'none'
+    startBtnContainer.style.display = ''
   }
 }
 // 3) Upon loading, the game state should be initialized, and a function should be 
