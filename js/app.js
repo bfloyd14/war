@@ -3,18 +3,32 @@
 const allCards = ["dA","dK","dQ","dJ","d10","d09","d08","d07","d06","d05","d04","d03","d02","hA","hK","hQ","hJ","h10","h09","h08","h07","h06","h05","h04","h03","h02","cA","cK","cQ","cJ","c10","c09","c08","c07","c06","c05","c04","c03","c02","sA","sK","sQ","sJ","s10","s09","s08","s07","s06","s05","s04","s03","s02"]
 
 // Include values of each card within War rules
-const dealtCards = 26
+// const cardValues = {
+//   'A' = 13 
+//   'K' = 12
+//   'Q' = 11
+//   'J' = 10
+//   '10'= 9
+//   '9' = 8
+//   '8' = 7
+//   '7' = 6
+//   '6' = 5
+//   '5' = 4
+//   '4' = 3
+//   '3' = 2
+//   '2' = 1
+// }
 
 /*----------------- Variables ---------------------*/
 let gameIsInPlay
 // Use a variable named playerCardDeck to keep track of cards won
-let playerHand = []
+let playerHand 
 // Use a variable named computerCardDeck to keep track of cards won
-let computerHand = []
+let computerHand 
 // Use a variable name playerUnusedCardDeck to keep track of cards remaining to be played
-let playerWinPile = []
+let playerWinPile
 // Use a variable named computerUnusedCardDeck  to keep track of cards remaining to be played
-let computerWinPile = []
+let computerWinPile 
 // Use a variable named checkForWinner to check for a victory when opponent has ran out of cards
 let checkForWinner, war, doubleWar, choseCountry
 // Use a variable named war to deploy when player 1 & player 2 turn over same card
@@ -58,15 +72,15 @@ function init(){
   generateDecks()
   render()
 }
-console.log(playerHand)
-console.log(computerHand)
+// console.log(playerHand)
+// console.log(computerHand)
 
 function setMessage(message){
   messageEl.textContent = message
 }
 
 function handleStart(evt){
-  gameDeck = generateDeck(evt.target.id)
+  gameDeck = generateDecks(evt.target.id)
   shuffleCards ()
   gameIsInPlay = true
   render()
@@ -75,11 +89,11 @@ function handleStart(evt){
 function generateDecks(){
   let deckCopy = [...allCards]
   let playerCardsToAdd = []
-  let computerCardsToAdd= []
+  let computerCardsToAdd = []
   for(let i = 0; i < 52; i++){
     let randIdx = Math.floor(Math.random() * deckCopy.length)
-    let cardToAdd = deckCopy.splice(randIdx, 1)
-    if(randIdx % 2){
+    let cardToAdd = deckCopy.splice(randIdx, 1) [0]
+    if(i % 2){
       playerCardsToAdd.push(cardToAdd)
   } else {
     computerCardsToAdd.push(cardToAdd)
@@ -88,16 +102,27 @@ function generateDecks(){
   playerHand = shuffleCards(playerCardsToAdd)
   computerHand = shuffleCards(computerCardsToAdd)
 }
+console.log(playerHand)
+console.log(computerHand)
 
 function shuffleCards(cards){
   let shuffledCards = []
-  for (i=0; i < 26; i++){
+  let shuffleCount = cards.length
+  for (i=0; i < shuffleCount; i++){
     let randIdx = Math.floor(Math.random()* cards.length)
     shuffledCards.push(cards.splice(randIdx, 1))
   }
     return shuffledCards
 }
 
+function checkCardVal(str){
+  
+}
+// function handleCardObjects(cards){
+//   let cardObjects = cards.map(card => {
+//     return {cardName: card, cardValue: '' }
+//   })
+// }
 
 function handlePlayClick(evt){
   startBtnContainer(evt)
