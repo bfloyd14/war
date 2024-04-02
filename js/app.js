@@ -2,37 +2,20 @@
 // const allCards
 const allCards = ["dA","dK","dQ","dJ","d10","d09","d08","d07","d06","d05","d04","d03","d02","hA","hK","hQ","hJ","h10","h09","h08","h07","h06","h05","h04","h03","h02","cA","cK","cQ","cJ","c10","c09","c08","c07","c06","c05","c04","c03","c02","sA","sK","sQ","sJ","s10","s09","s08","s07","s06","s05","s04","s03","s02"]
 
-// Include values of each card within War rules
-// const cardValues = {
-//   'A' = 13 
-//   'K' = 12
-//   'Q' = 11
-//   'J' = 10
-//   '10'= 9
-//   '9' = 8
-//   '8' = 7
-//   '7' = 6
-//   '6' = 5
-//   '5' = 4
-//   '4' = 3
-//   '3' = 2
-//   '2' = 1
-// }
-
 /*----------------- Variables ---------------------*/
 let gameIsInPlay
 // Use a variable named playerCardDeck to keep track of cards won
-let playerHand 
+let playerHand, computerHand
 // Use a variable named computerCardDeck to keep track of cards won
-let computerHand 
+let playerCard, computerCard 
 // Use a variable name playerUnusedCardDeck to keep track of cards remaining to be played
-let playerWinPile
+let playerWinPile, computerWinPile 
 // Use a variable named computerUnusedCardDeck  to keep track of cards remaining to be played
-let computerWinPile 
 // Use a variable named checkForWinner to check for a victory when opponent has ran out of cards
 let checkForWinner, war, doubleWar, choseCountry
 // Use a variable named war to deploy when player 1 & player 2 turn over same card
 // Use a variable named doubleWar to represent when war has resulted in drawing the same card
+let cardVal
 // Use a variable name playerCountry to determine which civilization is chosen
 // Stretch goal - have a drop down box to pick a country
 // Default country would be Vikings
@@ -45,18 +28,20 @@ let checkForWinner, war, doubleWar, choseCountry
 // const reset button for AAU to reset the game
 // const message to display updated message throughout the game
 const messageEl = document.getElementById('message')
-const playBtnContainer = document.querySelector('.play-button-container')
+const drawBtnContainer = document.querySelector('.play-button-container')
 const resetBtnContainer = document.querySelector('.reset-button-container')
 const resetBtn = document.getElementById('reset')
 const startBtnContainer = document.querySelector('.start-button-container')
+const cardContainer = document.querySelector('.card-container')
 // const playerActiveCard to keep track of the card that is played by the player
 // const computerActiveCard to keep track of the card that is played by computer
 
 
 /*----------------- Event Listeners -------------------*/
 // 6) Handle a player clicking a card deck with a `handleClick` function
-playBtnContainer.addEventListener('click', handlePlayClick)
+drawBtnContainer.addEventListener('click', handleDrawButton)
 resetBtn.addEventListener('click', init)
+cardContainer.addEventListener('click', checkCardVal)
 // startBtn.addEventListener('click', handleStart)
 // When a user clicks on their card deck, the player and the computer play their next card for their respective card decks.  
 // Create a Surrender (reset) button that shuffles the 56 card deck and deals out 28 cards to each player
@@ -72,19 +57,17 @@ function init(){
   generateDecks()
   render()
 }
-// console.log(playerHand)
-// console.log(computerHand)
 
 function setMessage(message){
   messageEl.textContent = message
 }
 
-function handleStart(evt){
-  gameDeck = generateDecks(evt.target.id)
-  shuffleCards ()
-  gameIsInPlay = true
-  render()
-}
+// function handleStart(evt){
+//   gameDeck = generateDecks
+//   shuffleCards ()
+//   gameIsInPlay = true
+//   render()
+// }
 
 function generateDecks(){
   let deckCopy = [...allCards]
@@ -112,33 +95,45 @@ function shuffleCards(cards){
     let randIdx = Math.floor(Math.random()* cards.length)
     shuffledCards.push(cards.splice(randIdx, 1))
   }
-    return shuffledCards
+  return shuffledCards
 }
 
-function checkCardVal(str){
-  
-}
-// function handleCardObjects(cards){
-//   let cardObjects = cards.map(card => {
-//     return {cardName: card, cardValue: '' }
-//   })
-// }
-
-function handlePlayClick(evt){
-  startBtnContainer(evt)
+function handleDrawButton(){
   gameIsInPlay = true
   render()
 }
-console.log(startBtnContainer)
+
+function checkCardVal(str){
+  let cardVal = str.slice(1)
+  if(cardVal === 'A') return 14
+  if(cardVal === 'K') return 13
+  if(cardVal === 'Q') return 12
+  if(cardVal === 'J') return 11
+  return parseInt(cardVal)
+}
+
+function compareCards(playerCard, computerCard){
+  if(cardVal(playerCard) > cardVal(computerCard)){
+    playerWinPile.push(playerCard, computerCard)
+  } 
+  if (cardVal(playerCard) < cardVal(computerCard)){
+    computerWinPile.push(playerCard, computerCard)
+}
+if (cardVal(playerCard) === cardVal(computerCard)){
+  // Iniates War
+  
+  }
+}
+console.log(playerHand)
 
 function render(){
   if(gameIsInPlay){
     startBtnContainer.style.display = 'none'
     resetBtnContainer.style.display = ''
-    playBtnContainer.style.display = ''
+    drawBtnContainer.style.display = ''
   } else {
     resetBtnContainer.style.display = 'none'
-    playBtnContainer.style.display = 'none'
+    drawBtnContainer.style.display = 'none'
     startBtnContainer.style.display = ''
   }
 }
