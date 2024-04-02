@@ -9,10 +9,10 @@ let playerHand, computerHand
 // Use a variable named computerCardDeck to keep track of cards won
 let playerCard, computerCard 
 // Use a variable name playerUnusedCardDeck to keep track of cards remaining to be played
-let playerWinPile, computerWinPile 
+let playerWinPile = [], computerWinPile = []
 // Use a variable named computerUnusedCardDeck  to keep track of cards remaining to be played
 // Use a variable named checkForWinner to check for a victory when opponent has ran out of cards
-let checkForWinner, war, doubleWar, choseCountry
+let checkForWinner, choseCountry
 // Use a variable named war to deploy when player 1 & player 2 turn over same card
 // Use a variable named doubleWar to represent when war has resulted in drawing the same card
 let cardVal
@@ -28,7 +28,7 @@ let cardVal
 // const reset button for AAU to reset the game
 // const message to display updated message throughout the game
 const messageEl = document.getElementById('message')
-const drawBtnContainer = document.querySelector('.play-button-container')
+const drawBtnContainer = document.querySelector('#play-card-btn')
 const resetBtnContainer = document.querySelector('.reset-button-container')
 const resetBtn = document.getElementById('reset')
 const startBtnContainer = document.querySelector('.start-button-container')
@@ -41,7 +41,6 @@ const cardContainer = document.querySelector('.card-container')
 // 6) Handle a player clicking a card deck with a `handleClick` function
 drawBtnContainer.addEventListener('click', handleDrawButton)
 resetBtn.addEventListener('click', init)
-cardContainer.addEventListener('click', checkCardVal)
 // startBtn.addEventListener('click', handleStart)
 // When a user clicks on their card deck, the player and the computer play their next card for their respective card decks.  
 // Create a Surrender (reset) button that shuffles the 56 card deck and deals out 28 cards to each player
@@ -62,12 +61,12 @@ function setMessage(message){
   messageEl.textContent = message
 }
 
-// function handleStart(evt){
-//   gameDeck = generateDecks
-//   shuffleCards ()
-//   gameIsInPlay = true
-//   render()
-// }
+function handleStart(evt){
+  gameDeck = generateDecks
+  shuffleCards ()
+  gameIsInPlay = true
+  render()
+}
 
 function generateDecks(){
   let deckCopy = [...allCards]
@@ -75,7 +74,7 @@ function generateDecks(){
   let computerCardsToAdd = []
   for(let i = 0; i < 52; i++){
     let randIdx = Math.floor(Math.random() * deckCopy.length)
-    let cardToAdd = deckCopy.splice(randIdx, 1) [0]
+    let cardToAdd = deckCopy.splice(randIdx, 1)[0]
     if(i % 2){
       playerCardsToAdd.push(cardToAdd)
   } else {
@@ -85,23 +84,26 @@ function generateDecks(){
   playerHand = shuffleCards(playerCardsToAdd)
   computerHand = shuffleCards(computerCardsToAdd)
 }
-console.log(playerHand)
-console.log(computerHand)
 
 function shuffleCards(cards){
   let shuffledCards = []
   let shuffleCount = cards.length
   for (i=0; i < shuffleCount; i++){
     let randIdx = Math.floor(Math.random()* cards.length)
-    shuffledCards.push(cards.splice(randIdx, 1))
+    shuffledCards.push(cards.splice(randIdx, 1)[0])
   }
+  console.log(shuffledCards)
   return shuffledCards
 }
 
 function handleDrawButton(){
-  gameIsInPlay = true
-  render()
+  
+  playerCard = playerHand.pop()
+  computerCard = computerHand.pop()
+  console.log(playerCard, computerCard)
+  compareCards()
 }
+
 
 function checkCardVal(str){
   let cardVal = str.slice(1)
@@ -112,30 +114,37 @@ function checkCardVal(str){
   return parseInt(cardVal)
 }
 
-function compareCards(playerCard, computerCard){
-  if(cardVal(playerCard) > cardVal(computerCard)){
-    playerWinPile.push(playerCard, computerCard)
+function compareCards(){
+  if(checkCardVal(playerCard) > checkCardVal(computerCard)){
+    playerWinPile.push(playerCard,(computerCard))
+    console.log('player wins hand')
   } 
-  if (cardVal(playerCard) < cardVal(computerCard)){
-    computerWinPile.push(playerCard, computerCard)
-}
-if (cardVal(playerCard) === cardVal(computerCard)){
-  // Iniates War
-  
+  if (checkCardVal(playerCard) < checkCardVal(computerCard)){
+    computerWinPile.push(playerCard,(computerCard)) 
+    console.log('computer wins hand')
   }
+  if (checkCardVal(playerCard) === checkCardVal(computerCard)){
+  // Iniates War
+  war()
+  console.log('war')
+  }
+  
 }
-console.log(playerHand)
+
+function war (){
+
+}
 
 function render(){
-  if(gameIsInPlay){
-    startBtnContainer.style.display = 'none'
-    resetBtnContainer.style.display = ''
-    drawBtnContainer.style.display = ''
-  } else {
-    resetBtnContainer.style.display = 'none'
-    drawBtnContainer.style.display = 'none'
-    startBtnContainer.style.display = ''
-  }
+  // if(gameIsInPlay){
+  //   startBtnContainer.style.display = 'none'
+  //   resetBtnContainer.style.display = ''
+  //   drawBtnContainer.style.display = ''
+  // } else {
+  //   resetBtnContainer.style.display = 'none'
+  //   drawBtnContainer.style.display = 'none'
+  //   startBtnContainer.style.display = ''
+  // }
 }
 // 3) Upon loading, the game state should be initialized, and a function should be 
 //    called to render this game state

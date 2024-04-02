@@ -1,6 +1,6 @@
 body {
   height: 100vh;
-  background-color: rgb(245, 168, 53);
+  background-color: rgb(49, 47, 47);
   margin: 0px;
   display: flex;
   flex-direction: column;
@@ -11,14 +11,14 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgb(192, 140, 62);
+  background-color: rgb(205, 198, 174);
   width: 100%;
-  padding: 0px;
+  height: 120px;
 }
 
-nav > img {
-  width:20%;
-  max-height: 50px;
+img {
+ height: 25%;
+ width: 20%;
 }
 
 h1 {
