@@ -117,16 +117,19 @@ function checkCardVal(str){
 function compareCards(){
   if(checkCardVal(playerCard) > checkCardVal(computerCard)){
     playerWinPile.push(playerCard,(computerCard))
-    console.log('player wins hand')
+    // console.log('player wins hand')
+    messageEl.textContent = 'player wins hand'
   } 
   if (checkCardVal(playerCard) < checkCardVal(computerCard)){
     computerWinPile.push(playerCard,(computerCard)) 
-    console.log('computer wins hand')
+    // console.log('computer wins hand')
+    messageEl.textContent = 'computer wins hand'
   }
   if (checkCardVal(playerCard) === checkCardVal(computerCard)){
-  // Iniates War
-  war()
-  console.log('war')
+    // Iniates War
+    war()
+    messageEl.textContent = 'war wins hand'
+  // console.log('war')
   }
   
 }
