@@ -36,8 +36,8 @@ const playerDeck = document.getElementById('player-deck')
 const computerDeck = document.getElementById('computer-deck')
 const playerCardInPlay = document.getElementById('player-card-inplay')
 const computerCardInPlay = document.getElementById('computer-card-inplay')
-const playerWinningPile = document.querySelector('.player-winning-pile')
-const computerWinningPile = document.querySelector('.computer-winning-pile')
+const playerWinningPile = document.getElementById('player-winning-pile')
+const computerWinningPile = document.getElementById('computer-winning-pile')
 // const playerActiveCard to keep track of the card that is played by the player
 // const computerActiveCard to keep track of the card that is played by computer
 
@@ -71,6 +71,7 @@ function handleStart(evt){
   gameIsInPlay = true
   gameDeck = generateDecks
   render()
+  messageEl.textContent = 'Press Attack to begin your battle!'
   console.log(gameIsInPlay)
 }
 
@@ -127,15 +128,17 @@ function compareCards(){
   if(checkCardVal(playerCard) > checkCardVal(computerCard)){
     playerWinPile.push(playerCard,(computerCard))
     messageEl.textContent = 'player wins hand'
-    playerWinningPile.classList.add(playerWinPile)
     playerWinningPile.classList.remove('outline')
+    playerWinningPile.classList.add('back-blue')
+    console.log(playerWinningPile)
   } 
   if (checkCardVal(playerCard) < checkCardVal(computerCard)){
     computerWinPile.push(playerCard,(computerCard)) 
     messageEl.textContent = 'computer wins hand'
     computerWinningPile.classList.add(computerWinPile)
     computerWinningPile.classList.remove('outline')
-    console.log(computerWinPile)
+    computerWinningPile.classList.add('back-red')
+    console.log(computerWinningPile)
   }
   if (checkCardVal(playerCard) === checkCardVal(computerCard)){
     // Iniates War
@@ -147,11 +150,11 @@ function compareCards(){
 }
 
 function war (){
-  if(checkCardVal(playerCard) === checkCardVal(computerCard)){
-    playerCardInPlay.splice(playerHand(1,3))
-    console.log(playerHand)
-    computerCardInPlay.splice(computerHand(1,3))
-  }
+  // if(checkCardVal(playerCard) === checkCardVal(computerCard)){
+  //   playerCardInPlay.splice(playerHand(1,3))
+  //   console.log(playerHand)
+  //   computerCardInPlay.splice(computerHand(1,3))
+//   }
 }
 
 function render(){
