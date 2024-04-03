@@ -74,7 +74,6 @@ function handleStart(evt){
   gameDeck = generateDecks
   render()
   messageEl.textContent = 'Press Attack to begin your battle!'
-  console.log(gameIsInPlay)
 }
 
 function shuffleCards(cards){
@@ -133,7 +132,6 @@ function compareCards(){
     playerWinningPile.classList.remove('outline')
     playerWinningPile.classList.add('back-blue')
     checkForWinner()
-    console.log(playerWinningPile)
   } 
   if (checkCardVal(playerCard) < checkCardVal(computerCard)){
     computerWinPile.push(playerCard,(computerCard)) 
@@ -141,7 +139,6 @@ function compareCards(){
     computerWinningPile.classList.remove('outline')
     computerWinningPile.classList.add('back-red')
     checkForWinner()
-    console.log(computerWinningPile)
   }
   // if (checkCardVal(playerCard) === checkCardVal(computerCard)){
     // Iniates War
@@ -178,6 +175,17 @@ function checkForWinner(){
     winner = false
   }
   console.log(winner)
+}
+
+function reshuffle(){
+  if(playerHand === 0 && playerWinPile > 0){
+    playerHand.splice(playerWinPile)
+  } if(computerHand === 0 && computerWinPile > 0){
+    computerHand.splice(computerWinPile)
+  }
+  shuffleCards()
+  console.log(playerHand)
+  console.log(computerHand)
 }
 
 function render(){
