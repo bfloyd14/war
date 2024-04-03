@@ -27,6 +27,18 @@ h1 {
 
 #message {
   font-size: 28px;
+  text-align: center;
+}
+
+.start-container {
+  display: flex;
+  justify-content: center
+}
+
+#computer-winning-pile {
+  display: flex
+  justify-content: flex-start;
+  align-items: flex-start
 }
 
 .card-container {
@@ -34,21 +46,21 @@ h1 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 40px;
+  padding: 0px;
 }
 
-.play-button-container {
+#player-winning-pile {
+  display: flex
+  justify-content: flex-end;
+  align-items: flex-end
+}
+
+.button-container {
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  border-radius: 10px
 }
 
-#playCardBtn{
-  border-radius: 4px;
-  background-color: gray
-  cursor: pointer;
-}
 
-#reset{
-  cursor: pointer;
-}

@@ -36,6 +36,8 @@ const playerDeck = document.getElementById('player-deck')
 const computerDeck = document.getElementById('computer-deck')
 const playerCardInPlay = document.getElementById('player-card-inplay')
 const computerCardInPlay = document.getElementById('computer-card-inplay')
+const playerWinningPile = document.querySelector('.player-winning-pile')
+const computerWinningPile = document.querySelector('.computer-winning-pile')
 // const playerActiveCard to keep track of the card that is played by the player
 // const computerActiveCard to keep track of the card that is played by computer
 
@@ -109,7 +111,6 @@ function handleDrawButton(){
   playerCardInPlay.classList.remove('outline')
   computerCardInPlay.classList.add(computerCard)
   computerCardInPlay.classList.remove('outline')
-  
   compareCards()
 }
 
