@@ -185,18 +185,24 @@ function render(){
     startBtn.style.display = 'none'
     reset.style.display = ''
     attackBtn.style.display = ''
-    // computerWinningPile.classList.add('outline')
-    // computerWinningPile.classList.remove('back-red')
-    // playerWinningPile.classList.add('outline')
-    // playerWinningPile.classList.remove('back-blue')
+    playerCardInPlay.classList.remove(playerCard)
+    computerCardInPlay.classList.remove(computerCard)
+    computerWinningPile.classList.add('outline')
+    computerWinningPile.classList.remove('back-red')
+    playerWinningPile.classList.add('outline')
+    playerWinningPile.classList.remove('back-blue')
   } else {
     reset.style.display = 'none'
     attackBtn.style.display = 'none'
     startBtn.style.display = ''
-    // computerWinningPile.classList.add('outline')
-    // computerWinningPile.classList.remove('back-red')
-    // playerWinningPile.classList.add('outline')
-    // playerWinningPile.classList.remove('back-blue')
+    playerCardInPlay.classList.remove(playerCard)
+    computerCardInPlay.classList.remove(computerCard)
+    computerCardInPlay.classList.add('outline')
+    playerCardInPlay.classList.add('outline')
+    computerWinningPile.classList.add('outline')
+    computerWinningPile.classList.remove('back-red')
+    playerWinningPile.classList.add('outline')
+    playerWinningPile.classList.remove('back-blue')
   }
 }
 // 3) Upon loading, the game state should be initialized, and a function should be 
