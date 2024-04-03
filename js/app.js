@@ -12,10 +12,11 @@ let playerCard, computerCard
 let playerWinPile = [], computerWinPile = []
 // Use a variable named computerUnusedCardDeck  to keep track of cards remaining to be played
 // Use a variable named checkForWinner to check for a victory when opponent has ran out of cards
-let checkForWinner, choseCountry
+let winner, choseCountry
 // Use a variable named war to deploy when player 1 & player 2 turn over same card
 // Use a variable named doubleWar to represent when war has resulted in drawing the same card
 let cardVal
+let playerWarCard = [], computerWarCard = []
 // Use a variable name playerCountry to determine which civilization is chosen
 // Stretch goal - have a drop down box to pick a country
 // Default country would be Vikings
@@ -57,6 +58,7 @@ init()
 
 function init(){
   gameIsInPlay = false
+  winner = false
   playerHand = []
   computerHand = []
   generateDecks()
@@ -127,47 +129,74 @@ function checkCardVal(str){
 function compareCards(){
   if(checkCardVal(playerCard) > checkCardVal(computerCard)){
     playerWinPile.push(playerCard,(computerCard))
-    messageEl.textContent = 'player wins hand'
+    messageEl.textContent = 'The player wins the hand'
     playerWinningPile.classList.remove('outline')
     playerWinningPile.classList.add('back-blue')
+    checkForWinner()
     console.log(playerWinningPile)
   } 
   if (checkCardVal(playerCard) < checkCardVal(computerCard)){
     computerWinPile.push(playerCard,(computerCard)) 
-    messageEl.textContent = 'computer wins hand'
-    computerWinningPile.classList.add(computerWinPile)
+    messageEl.textContent = 'The computer wins the hand'
     computerWinningPile.classList.remove('outline')
     computerWinningPile.classList.add('back-red')
+    checkForWinner()
     console.log(computerWinningPile)
   }
-  if (checkCardVal(playerCard) === checkCardVal(computerCard)){
+  // if (checkCardVal(playerCard) === checkCardVal(computerCard)){
     // Iniates War
-    war()
-    messageEl.textContent = 'WAR has begun!'
+    // war()
+    // messageEl.textContent = 'WAR has begun!'
   // console.log('war')
-  }
+  // }
   
 }
 
-function war (){
-  // if(checkCardVal(playerCard) === checkCardVal(computerCard)){
-  //   playerCardInPlay.splice(playerHand(1,3))
-  //   console.log(playerHand)
-  //   computerCardInPlay.splice(computerHand(1,3))
+// function war (){
+//     let playerWarCard = playerCardInPlay.splice(playerHand[0,4])
+//     console.log(playerWarCard)
+//     let computerWarCard = computerCardInPlay.splice(computerHand[0,4])
+//     console.log(computerWarCard)
+//     if(playerWarCard[3] > computerWarCard[3]){
+//     playerWinPile.push(playerWarCard, computerWarCard)
+//     messageEl = 'The Player has won this battle!'
+//   } else if(playerWarCard[3] < computerWarCard[3]){
+//     computerWinPile.push(playerWarCard, computerWarCard)
+//     messageEl = 'The Computer has won this battle!'
+//   } else{
+//     war()
+//     messageEl = 'You must fight again!'
 //   }
+// }
+
+function checkForWinner(){
+  if(playerHand && playerWinPile === 0){
+    winner = true
+  } else if(computerHand && computerWinPile === 0){
+    winner = true
+  } else {
+    winner = false
+  }
+  console.log(winner)
 }
 
 function render(){
- 
-
   if(gameIsInPlay){
     startBtn.style.display = 'none'
     reset.style.display = ''
     attackBtn.style.display = ''
+    // computerWinningPile.classList.add('outline')
+    // computerWinningPile.classList.remove('back-red')
+    // playerWinningPile.classList.add('outline')
+    // playerWinningPile.classList.remove('back-blue')
   } else {
     reset.style.display = 'none'
     attackBtn.style.display = 'none'
     startBtn.style.display = ''
+    // computerWinningPile.classList.add('outline')
+    // computerWinningPile.classList.remove('back-red')
+    // playerWinningPile.classList.add('outline')
+    // playerWinningPile.classList.remove('back-blue')
   }
 }
 // 3) Upon loading, the game state should be initialized, and a function should be 
