@@ -68,10 +68,10 @@ function setMessage(message){
 }
 
 function handleStart(evt){
-  gameDeck = generateDecks
-  shuffleCards ()
   gameIsInPlay = true
+  gameDeck = generateDecks
   render()
+  console.log(gameIsInPlay)
 }
 
 function shuffleCards(cards){
@@ -126,39 +126,46 @@ function checkCardVal(str){
 function compareCards(){
   if(checkCardVal(playerCard) > checkCardVal(computerCard)){
     playerWinPile.push(playerCard,(computerCard))
-    // console.log('player wins hand')
     messageEl.textContent = 'player wins hand'
+    playerWinningPile.classList.add(playerWinPile)
+    playerWinningPile.classList.remove('outline')
   } 
   if (checkCardVal(playerCard) < checkCardVal(computerCard)){
     computerWinPile.push(playerCard,(computerCard)) 
-    // console.log('computer wins hand')
     messageEl.textContent = 'computer wins hand'
+    computerWinningPile.classList.add(computerWinPile)
+    computerWinningPile.classList.remove('outline')
+    console.log(computerWinPile)
   }
   if (checkCardVal(playerCard) === checkCardVal(computerCard)){
     // Iniates War
     war()
-    messageEl.textContent = 'war has begun!'
+    messageEl.textContent = 'WAR has begun!'
   // console.log('war')
   }
   
 }
 
 function war (){
-
+  if(checkCardVal(playerCard) === checkCardVal(computerCard)){
+    playerCardInPlay.splice(playerHand(1,3))
+    console.log(playerHand)
+    computerCardInPlay.splice(computerHand(1,3))
+  }
 }
 
 function render(){
  
 
-  // if(gameIsInPlay){
-  //   startBtnContainer.style.display = 'none'
-  //   resetBtnContainer.style.display = ''
-  //   drawBtnContainer.style.display = ''
-  // } else {
-  //   resetBtnContainer.style.display = 'none'
-  //   drawBtnContainer.style.display = 'none'
-  //   startBtnContainer.style.display = ''
-  // }
+  if(gameIsInPlay){
+    startBtn.style.display = 'none'
+    reset.style.display = ''
+    attackBtn.style.display = ''
+  } else {
+    reset.style.display = 'none'
+    attackBtn.style.display = 'none'
+    startBtn.style.display = ''
+  }
 }
 // 3) Upon loading, the game state should be initialized, and a function should be 
 //    called to render this game state

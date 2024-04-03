@@ -17,7 +17,7 @@ nav {
 }
 
 img {
- height: 25%;
+ height:125px ;
  width: 20%;
 }
 
@@ -33,10 +33,12 @@ h1 {
 .start-container {
   display: flex;
   justify-content: center
+  
 }
 
-#computer-winning-pile {
+.computer-win-container {
   display: flex
+  flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start
 }
@@ -49,7 +51,7 @@ h1 {
   padding: 0px;
 }
 
-#player-winning-pile {
+.player-win-container {
   display: flex
   justify-content: flex-end;
   align-items: flex-end
