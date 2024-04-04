@@ -31,14 +31,12 @@ const playerCardInPlay = document.getElementById('player-card-inplay')
 const computerCardInPlay = document.getElementById('computer-card-inplay')
 const playerWinningPile = document.getElementById('player-winning-pile')
 const computerWinningPile = document.getElementById('computer-winning-pile')
-
+const medievalWar = new Audio('../Audio/medievalwar.wav')
 /*----------------- Event Listeners -------------------*/
 
 attackBtn.addEventListener('click', handleDrawButton)
 resetBtn.addEventListener('click', init)
 startBtn.addEventListener('click', handleStart)
-document.getElementById('play-card-btn').addEventListener('click', function(){})
-
 // 8) Create a score display for each player keeping track of cards won
 
 /*------------------- Functions ----------------------*/
@@ -58,6 +56,8 @@ function setMessage(message){
 }
 
 function handleStart(evt){
+  medievalWar.volume = .1
+  medievalWar.play()
   gameIsInPlay = true
   gameDeck = generateDecks
   render()
@@ -129,30 +129,32 @@ function compareCards(){
     computerWinningPile.classList.remove('outline')
     computerWinningPile.classList.add('back-red')
   } 
-//   if (checkCardVal(playerCard) === checkCardVal(computerCard)){
-//     //Iniates War
-//     war()
-//     setMessage('WAR has begun!')
-//   console.log('war')
-//   }
+  if (checkCardVal(playerCard) === checkCardVal(computerCard)){
+    //Iniates War
+    war()
+    setMessage('WAR has begun!')
+  console.log('war')
+  }
 }
 
-// function war (){
-//     let playerWarCard = playerCardInPlay.splice(playerHand[0,4])
-//     console.log(playerWarCard)
-//     let computerWarCard = computerCardInPlay.splice(computerHand[0,4])
-//     console.log(computerWarCard)
-//     if(playerWarCard[3] > computerWarCard[3]){
-//     playerWinPile.push(playerWarCard, computerWarCard)
-//     messageEl = 'The Player has won this battle!'
-//   } else if(playerWarCard[3] < computerWarCard[3]){
-//     computerWinPile.push(playerWarCard, computerWarCard)
-//     messageEl = 'The Computer has won this battle!'
-//   } else{
-//     war()
-//     messageEl = 'You must fight again!'
-//   }
-// }
+function war (){
+  checkForWinner()
+  redistribute()
+    let playerWarCard = playerCardInPlay.splice(playerHand[0,4])
+    console.log(playerWarCard)
+    let computerWarCard = computerCardInPlay.splice(computerHand[0,4])
+    console.log(computerWarCard)
+    if(playerWarCard[3] > computerWarCard[3]){
+    playerWinPile.push(playerWarCard, computerWarCard)
+    messageEl = 'The Player has won this battle!'
+  } else if(playerWarCard[3] < computerWarCard[3]){
+    computerWinPile.push(playerWarCard, computerWarCard)
+    messageEl = 'The Computer has won this battle!'
+  } else{
+    war()
+    messageEl = 'You must fight again!'
+  }
+}
 
 function checkForWinner(){
   if(playerHand.length === 0 && playerWinPile.length === 0){
@@ -161,7 +163,9 @@ function checkForWinner(){
   } else if(computerHand.length === 0 && computerWinPile.length === 0){
     winner = true
     setMessage('VICTORY! The player has won the WAR.')
-  } 
+  } else {
+    winner = false
+  }
   console.log(winner)
 }
 
