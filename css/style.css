@@ -1,24 +1,25 @@
 body {
   height: 100vh;
   background-color: rgb(240, 222, 121);
-  margin: 0px;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 nav {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgb(205, 198, 174);
+  background-color: rgb(203, 187, 136);
   width: 100%;
   height: 120px;
+  margin-right: 500px;
 }
 
 img {
- height:125px ;
- width: 20%;
+  height: auto;
+  width: 20%;
+  margin-top: 700px;
+  margin-right: 1000px;
 }
 
 h1 {
@@ -26,21 +27,25 @@ h1 {
 }
 
 #message {
+  margin-top: 100px;
   font-size: 28px;
   text-align: center;
+  padding: 0px;
 }
 
-.start-container {
+#start {
+  cursor: pointer;
+  border-radius: 10px;
+  font-size: 24px;
   display: flex;
-  justify-content: center
-  
+  justify-content: center;
+  align-items: center;
+  width: 75px;
 }
 
 .computer-win-container {
-  display: flex
-  flex-direction: column;
+  display: flex;
   justify-content: flex-start;
-  align-items: flex-start
 }
 
 .card-container {
@@ -49,20 +54,30 @@ h1 {
   justify-content: center;
   align-items: center;
   padding: 0px;
+  margin: 0px;
 }
 
 .player-win-container {
-  display: flex
-  justify-content: flex-end;
-  align-items: flex-end
-}
-
-.button-container {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  border-radius: 10px
+  justify-content: flex-end;
+  align-items: flex-end;
 }
 
+.button-container{
+  flex: display;
+  justify-content: space-around;
+  
+}
+
+#play-card-btn {
+  cursor: pointer;
+  border-radius: 10px;
+  font-size: 24px;
+}
+
+#reset{
+  cursor: pointer;
+  border-radius: 10px;
+  font-size: 24px;
+}
 

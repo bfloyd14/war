@@ -184,8 +184,6 @@ function reshuffle(){
     computerHand.splice(computerWinPile)
   }
   shuffleCards()
-  console.log(playerHand)
-  console.log(computerHand)
 }
 
 function render(){
