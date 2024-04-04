@@ -104,7 +104,6 @@ function handleDrawButton(){
   computerCardInPlay.classList.add(computerCard)
   computerCardInPlay.classList.remove('outline')
   compareCards()
-  
 }
 
 function checkCardVal(str){
@@ -138,16 +137,25 @@ function compareCards(){
 }
 
 function war (){
+  //War is initiated when the playerCardInPlay & computerCardInPlay have the same value.
+  //Next, each player draws 4 cards , places 3 cards faced down and flips the 4th card then evaluate to see who is winner.  
+  //If player/computer does not have enough cards to complete war, you must check to see if they have cards in their win pile, if so, redistribute back into their hand and shuffle, then complete the war process.
+  //Winner takes all the cardsInPlay
+  //If the 4th card for the player and computer are the same value, you iniate the process of war again until there is a winner.
   checkForWinner()
   redistribute()
-    let playerWarCard = playerCardInPlay.splice(playerHand[0,4])
-    console.log(playerWarCard)
-    let computerWarCard = computerCardInPlay.splice(computerHand[0,4])
-    console.log(computerWarCard)
-    if(playerWarCard[3] > computerWarCard[3]){
+  let playerWarCard = playerHand.splice([0,4])[0]
+  checkForWinner()
+  redistribute()
+  console.log(playerCardInPlay)
+  let computerWarCard = computerHand.splice([0,4])[0]
+  checkForWinner()
+  redistribute()
+  console.log(computerCardInPlay)
+  if(checkCardVal(playerWarCard[3]) > checkCardVal(computerWarCard[3])){
     playerWinPile.push(playerWarCard, computerWarCard)
     messageEl = 'The Player has won this battle!'
-  } else if(playerWarCard[3] < computerWarCard[3]){
+  } else if(checkCardVal(playerWarCard[3]) > checkCardVal(computerWarCard[3])){
     computerWinPile.push(playerWarCard, computerWarCard)
     messageEl = 'The Computer has won this battle!'
   } else{
