@@ -31,7 +31,7 @@ const playerCardInPlay = document.getElementById('player-card-inplay')
 const computerCardInPlay = document.getElementById('computer-card-inplay')
 const playerWinningPile = document.getElementById('player-winning-pile')
 const computerWinningPile = document.getElementById('computer-winning-pile')
-const medievalWar = new Audio('../Audio/medievalwar.wav')
+const medievalWar = new Audio('../audio/medievalwar.wav')
 /*----------------- Event Listeners -------------------*/
 
 attackBtn.addEventListener('click', handleDrawButton)
