@@ -1,20 +1,13 @@
 /*------------------ Constants -----------------------*/
-// const allCards
+
 const allCards = ["dA","dK","dQ","dJ","d10","d09","d08","d07","d06","d05","d04","d03","d02","hA","hK","hQ","hJ","h10","h09","h08","h07","h06","h05","h04","h03","h02","cA","cK","cQ","cJ","c10","c09","c08","c07","c06","c05","c04","c03","c02","sA","sK","sQ","sJ","s10","s09","s08","s07","s06","s05","s04","s03","s02"]
 
 /*----------------- Variables ---------------------*/
 let gameIsInPlay
-// Use a variable named playerCardDeck to keep track of cards won
 let playerHand, computerHand
-// Use a variable named computerCardDeck to keep track of cards won
 let playerCard, computerCard 
-// Use a variable name playerUnusedCardDeck to keep track of cards remaining to be played
 let playerWinPile = [], computerWinPile = []
-// Use a variable named computerUnusedCardDeck  to keep track of cards remaining to be played
-// Use a variable named checkForWinner to check for a victory when opponent has ran out of cards
 let winner, choseCountry
-// Use a variable named war to deploy when player 1 & player 2 turn over same card
-// Use a variable named doubleWar to represent when war has resulted in drawing the same card
 let cardVal
 let playerWarCard = [], computerWarCard = []
 // Use a variable name playerCountry to determine which civilization is chosen
@@ -26,8 +19,7 @@ let playerWarCard = [], computerWarCard = []
 
 
 /*------------ Cached Element References -----------*/
-// const reset button for AAU to reset the game
-// const message to display updated message throughout the game
+
 const messageEl = document.getElementById('message')
 const attackBtn = document.getElementById('play-card-btn')
 const resetBtn = document.getElementById('reset')
@@ -39,18 +31,14 @@ const playerCardInPlay = document.getElementById('player-card-inplay')
 const computerCardInPlay = document.getElementById('computer-card-inplay')
 const playerWinningPile = document.getElementById('player-winning-pile')
 const computerWinningPile = document.getElementById('computer-winning-pile')
-// const playerActiveCard to keep track of the card that is played by the player
-// const computerActiveCard to keep track of the card that is played by computer
-
 
 /*----------------- Event Listeners -------------------*/
-// 6) Handle a player clicking a card deck with a `handleClick` function
+
 attackBtn.addEventListener('click', handleDrawButton)
 resetBtn.addEventListener('click', init)
 startBtn.addEventListener('click', handleStart)
 document.getElementById('play-card-btn').addEventListener('click', function(){})
-// When a user clicks on their card deck, the player and the computer play their next card for their respective card decks.  
-// Create a Surrender (reset) button that shuffles the 56 card deck and deals out 28 cards to each player
+
 // 8) Create a score display for each player keeping track of cards won
 
 /*------------------- Functions ----------------------*/
@@ -105,6 +93,8 @@ function generateDecks(){
 }
 
 function handleDrawButton(){
+  checkForWinner()
+  redistribute()
   playerCardInPlay.classList.remove(playerCard)
   computerCardInPlay.classList.remove(computerCard)
   playerCard = playerHand.pop()
@@ -114,8 +104,7 @@ function handleDrawButton(){
   computerCardInPlay.classList.add(computerCard)
   computerCardInPlay.classList.remove('outline')
   compareCards()
-  checkForWinner()
-  reshuffle()
+  
 }
 
 function checkCardVal(str){
@@ -166,21 +155,21 @@ function compareCards(){
 // }
 
 function checkForWinner(){
-  if(playerHand === 0 && playerWinPile === 0){
+  if(playerHand.length === 0 && playerWinPile.length === 0){
     winner = true
     setMessage('DEFEAT! The computer has won the WAR.')
-  } else if(computerHand === 0 && computerWinPile === 0){
+  } else if(computerHand.length === 0 && computerWinPile.length === 0){
     winner = true
     setMessage('VICTORY! The player has won the WAR.')
   } 
   console.log(winner)
 }
 
-function reshuffle(){
-  if(playerHand === 0 && playerWinPile > 0){
+function redistribute(){
+  if(playerHand.length === 0 && playerWinPile.length > 0){
     playerHand = shuffleCards([...playerWinPile])
     playerWinPile = []
-  } if(computerHand === 0 && computerWinPile > 0){
+  } if(computerHand.length === 0 && computerWinPile.length > 0){
     computerHand = shuffleCards([...computerWinPile])
     computerWinPile = []
   } 
@@ -211,6 +200,13 @@ function render(){
     playerWinningPile.classList.remove('back-blue')
   }
 }
+
+
+
+
+
+
+
 // 3) Upon loading, the game state should be initialized, and a function should be 
 //    called to render this game state
 // Call a function named init upon loading of game

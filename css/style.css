@@ -1,8 +1,6 @@
 body {
   height: 100vh;
   background-color: rgb(240, 222, 121);
-  display: flex;
-  flex-direction: column;
 }
 
 nav {
@@ -18,7 +16,6 @@ nav {
 img {
   height: 125px;
   width: 20%;
- 
 }
 
 h1 {
@@ -32,19 +29,23 @@ h1 {
   padding: 0px;
 }
 
-#start {
-  cursor: pointer;
-  border-radius: 10px;
-  font-size: 24px;
+.start-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 75px;
+  width: 100%;
+}
+#start{
+  cursor: pointer;
+  border-radius: 10px;
+  font-size: 24px;
 }
 
 .computer-win-container {
+  background-color: aquamarine;
   display: flex;
   justify-content: flex-start;
+  width: 100%;
 }
 
 .card-container {
