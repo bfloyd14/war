@@ -114,6 +114,8 @@ function handleDrawButton(){
   computerCardInPlay.classList.add(computerCard)
   computerCardInPlay.classList.remove('outline')
   compareCards()
+  checkForWinner()
+  reshuffle()
 }
 
 function checkCardVal(str){
@@ -128,25 +130,22 @@ function checkCardVal(str){
 function compareCards(){
   if(checkCardVal(playerCard) > checkCardVal(computerCard)){
     playerWinPile.push(playerCard,(computerCard))
-    messageEl.textContent = 'The player wins the hand'
+    setMessage('The player wins the hand')
     playerWinningPile.classList.remove('outline')
     playerWinningPile.classList.add('back-blue')
-    checkForWinner()
   } 
   if (checkCardVal(playerCard) < checkCardVal(computerCard)){
     computerWinPile.push(playerCard,(computerCard)) 
-    messageEl.textContent = 'The computer wins the hand'
+    setMessage('The computer wins the hand')
     computerWinningPile.classList.remove('outline')
     computerWinningPile.classList.add('back-red')
-    checkForWinner()
-  }
-  // if (checkCardVal(playerCard) === checkCardVal(computerCard)){
-    // Iniates War
-    // war()
-    // messageEl.textContent = 'WAR has begun!'
-  // console.log('war')
-  // }
-  
+  } 
+//   if (checkCardVal(playerCard) === checkCardVal(computerCard)){
+//     //Iniates War
+//     war()
+//     setMessage('WAR has begun!')
+//   console.log('war')
+//   }
 }
 
 // function war (){
@@ -167,23 +166,24 @@ function compareCards(){
 // }
 
 function checkForWinner(){
-  if(playerHand && playerWinPile === 0){
+  if(playerHand === 0 && playerWinPile === 0){
     winner = true
-  } else if(computerHand && computerWinPile === 0){
+    setMessage('DEFEAT! The computer has won the WAR.')
+  } else if(computerHand === 0 && computerWinPile === 0){
     winner = true
-  } else {
-    winner = false
-  }
+    setMessage('VICTORY! The player has won the WAR.')
+  } 
   console.log(winner)
 }
 
 function reshuffle(){
   if(playerHand === 0 && playerWinPile > 0){
-    playerHand.splice(playerWinPile)
+    playerHand = shuffleCards([...playerWinPile])
+    playerWinPile = []
   } if(computerHand === 0 && computerWinPile > 0){
-    computerHand.splice(computerWinPile)
-  }
-  shuffleCards()
+    computerHand = shuffleCards([...computerWinPile])
+    computerWinPile = []
+  } 
 }
 
 function render(){
