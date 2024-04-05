@@ -56,7 +56,7 @@ function setMessage(message){
 }
 
 function handleStart(evt){
-  medievalWar.volume = .1
+  medievalWar.volume = .05
   medievalWar.play()
   gameIsInPlay = true
   gameDeck = generateDecks
@@ -113,19 +113,20 @@ function checkCardVal(card){
   if(cardVal === 'Q') return 12
   if(cardVal === 'J') return 11
   return parseInt(cardVal)
+  console.log(cardVal(playerCard, computerCard))
 }
 
 function compareCards(){
   if(checkCardVal(playerCard) > checkCardVal(computerCard)){
     playerWinPile.push(playerCard,(computerCard))
-    setMessage('The player wins the hand')
+    setMessage('The player wins the hand!')
     playerWinningPile.classList.remove('outline')
     playerWinningPile.classList.add('back-blue')
     console.log(playerCard, computerCard)
   } 
   if (checkCardVal(playerCard) < checkCardVal(computerCard)){
     computerWinPile.push(playerCard,(computerCard)) 
-    setMessage('The computer wins the hand')
+    setMessage('The computer wins the hand!')
     computerWinningPile.classList.remove('outline')
     computerWinningPile.classList.add('back-red')
   } 
@@ -144,17 +145,20 @@ function war (){
   //If the 4th card for the player and computer are the same value, you iniate the process of war again until there is a winner.
   checkForWinner()
   redistribute()
-  let playerWarCard = playerHand.slice(0,4)
+  let playerWarCard = playerHand.slice(0,4)[0]
+  playerWarCard.toString()
+  console.log(playerWarCard)
   checkForWinner()
   redistribute()
-  let computerWarCard = computerHand.slice(0,4)
+  let computerWarCard = computerHand.slice(0,4)[0]
+  computerWarCard.toString()
+  console.log(computerWarCard)
   checkForWinner()
   redistribute()
-  console.log(computerCardInPlay)
-  if(checkCardVal(playerWarCard[3]) > checkCardVal(computerWarCard[3])){
+  if(checkCardVal(playerWarCard) > checkCardVal(computerWarCard)){
     playerWinPile.push(playerWarCard, computerWarCard)
     setMessage('The Player has won this battle!')
-  } else if(checkCardVal(playerWarCard[3]) < checkCardVal(computerWarCard[3])){
+  } else if(checkCardVal(playerWarCard) < checkCardVal(computerWarCard)){
     computerWinPile.push(playerWarCard, computerWarCard)
     setMessage('The Computer has won this battle!')
   } else{
@@ -173,7 +177,6 @@ function checkForWinner(){
   } else {
     winner = false
   }
-  console.log(winner)
 }
 
 function redistribute(){
