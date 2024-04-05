@@ -1,3 +1,3 @@
-# War: Card Game Walk Through
+# War: Card Game Age of Empire Walk Through
 
-To follow along or to pull my code
+## 

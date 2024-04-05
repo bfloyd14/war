@@ -71,7 +71,7 @@ function shuffleCards(cards){
     let randIdx = Math.floor(Math.random()* cards.length)
     shuffledCards.push(cards.splice(randIdx, 1)[0])
   }
-  console.log(shuffledCards)
+  // console.log(shuffledCards)
   return shuffledCards
 }
 
@@ -106,8 +106,8 @@ function handleDrawButton(){
   compareCards()
 }
 
-function checkCardVal(str){
-  let cardVal = str.slice(1)
+function checkCardVal(card){
+  let cardVal = card.slice(1)
   if(cardVal === 'A') return 14
   if(cardVal === 'K') return 13
   if(cardVal === 'Q') return 12
@@ -132,7 +132,6 @@ function compareCards(){
     //Iniates War
     war()
     setMessage('WAR has begun!')
-  console.log('war')
   }
 }
 
@@ -144,11 +143,10 @@ function war (){
   //If the 4th card for the player and computer are the same value, you iniate the process of war again until there is a winner.
   checkForWinner()
   redistribute()
-  let playerWarCard = playerHand.splice([0,4])[0]
+  let playerWarCard = playerHand.slice(0,4)[0]
   checkForWinner()
   redistribute()
-  console.log(playerCardInPlay)
-  let computerWarCard = computerHand.splice([0,4])[0]
+  let computerWarCard = computerHand.slice(0,4)[0]
   checkForWinner()
   redistribute()
   console.log(computerCardInPlay)
