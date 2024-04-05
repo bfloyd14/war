@@ -121,6 +121,7 @@ function compareCards(){
     setMessage('The player wins the hand')
     playerWinningPile.classList.remove('outline')
     playerWinningPile.classList.add('back-blue')
+    console.log(playerCard, computerCard)
   } 
   if (checkCardVal(playerCard) < checkCardVal(computerCard)){
     computerWinPile.push(playerCard,(computerCard)) 
