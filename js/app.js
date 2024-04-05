@@ -132,39 +132,43 @@ function compareCards(){
   } 
   if (checkCardVal(playerCard) === checkCardVal(computerCard)){
     //Iniates War
-    war()
     setMessage('WAR has begun!')
+    war()
   }
 }
 
 function war (){
-  //War is initiated when the playerCardInPlay & computerCardInPlay have the same value.
-  //Next, each player draws 4 cards , places 3 cards faced down and flips the 4th card then evaluate to see who is winner.  
-  //If player/computer does not have enough cards to complete war, you must check to see if they have cards in their win pile, if so, redistribute back into their hand and shuffle, then complete the war process.
-  //Winner takes all the cardsInPlay
-  //If the 4th card for the player and computer are the same value, you iniate the process of war again until there is a winner.
   checkForWinner()
   redistribute()
-  let playerWarCard = playerHand.slice(0,4)[0]
-  playerWarCard.toString()
-  console.log(playerWarCard)
+  let playerWarCards = playerHand.slice(0,4) 
+  playerCardInPlay.classList.remove(playerCard)
+  playerCard = playerWarCards[3]
+  playerCardInPlay.classList.add(playerCard)
+  console.log(playerWarCards)
   checkForWinner()
   redistribute()
-  let computerWarCard = computerHand.slice(0,4)[0]
-  computerWarCard.toString()
-  console.log(computerWarCard)
+  let computerWarCards = computerHand.slice(0,4)
+  computerCardInPlay.classList.remove(computerCard)
+  computerCard = computerWarCards[3]
+  computerCardInPlay.classList.add(computerCard)
+  console.log(computerWarCards)
   checkForWinner()
   redistribute()
-  if(checkCardVal(playerWarCard) > checkCardVal(computerWarCard)){
-    playerWinPile.push(playerWarCard, computerWarCard)
+  if(checkCardVal(playerWarCards[3]) > checkCardVal(computerWarCards[3])){
+    playerWinPile.push(...playerWarCards, ...computerWarCards)
     setMessage('The Player has won this battle!')
-  } else if(checkCardVal(playerWarCard) < checkCardVal(computerWarCard)){
-    computerWinPile.push(playerWarCard, computerWarCard)
+    console.log('The Player has won this battle!')
+
+  } else if(checkCardVal(playerWarCards[3]) < checkCardVal(computerWarCards[3])){
+    computerWinPile.push(...playerWarCards, ...computerWarCards)
     setMessage('The Computer has won this battle!')
+    console.log('The Computer has won this battle!')
   } else{
     war()
     setMessage('You must fight again!')
+    console.log('You must fight again!')
   }
+  console.log(playerWarCards, computerWarCards, playerWinPile, computerWinPile)
 }
 
 function checkForWinner(){
