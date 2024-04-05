@@ -16,7 +16,8 @@ nav {
 }
 
 img {
-  height: 125px;
+  /* display: flex;
+  justify-content: flex-start; */
   width: 20%;
 }
 

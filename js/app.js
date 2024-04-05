@@ -144,22 +144,22 @@ function war (){
   //If the 4th card for the player and computer are the same value, you iniate the process of war again until there is a winner.
   checkForWinner()
   redistribute()
-  let playerWarCard = playerHand.slice(0,4)[0]
+  let playerWarCard = playerHand.slice(0,4)
   checkForWinner()
   redistribute()
-  let computerWarCard = computerHand.slice(0,4)[0]
+  let computerWarCard = computerHand.slice(0,4)
   checkForWinner()
   redistribute()
   console.log(computerCardInPlay)
   if(checkCardVal(playerWarCard[3]) > checkCardVal(computerWarCard[3])){
     playerWinPile.push(playerWarCard, computerWarCard)
-    messageEl = 'The Player has won this battle!'
-  } else if(checkCardVal(playerWarCard[3]) > checkCardVal(computerWarCard[3])){
+    setMessage('The Player has won this battle!')
+  } else if(checkCardVal(playerWarCard[3]) < checkCardVal(computerWarCard[3])){
     computerWinPile.push(playerWarCard, computerWarCard)
-    messageEl = 'The Computer has won this battle!'
+    setMessage('The Computer has won this battle!')
   } else{
     war()
-    messageEl = 'You must fight again!'
+    setMessage('You must fight again!')
   }
 }
 
