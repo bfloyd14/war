@@ -6,10 +6,10 @@ const allCards = ["dA","dK","dQ","dJ","d10","d09","d08","d07","d06","d05","d04",
 let gameIsInPlay
 let playerHand, computerHand
 let playerCard, computerCard 
-let playerWinPile = [], computerWinPile = []
+let playerWinsPile = [], computerWinsPile = []
 let winner, choseCountry
 let cardVal
-let playerWarCard = [], computerWarCard = []
+let playerWarCards = [], computerWarCards = []
 // Use a variable name playerCountry to determine which civilization is chosen
 // Stretch goal - have a drop down box to pick a country
 // Default country would be Vikings
@@ -118,14 +118,14 @@ function checkCardVal(card){
 
 function compareCards(){
   if(checkCardVal(playerCard) > checkCardVal(computerCard)){
-    playerWinPile.push(playerCard,(computerCard))
+    playerWinsPile.push(playerCard,(computerCard))
     setMessage('The player wins the hand!')
     playerWinningPile.classList.remove('outline')
     playerWinningPile.classList.add('back-blue')
     console.log(playerCard, computerCard)
   } 
   if (checkCardVal(playerCard) < checkCardVal(computerCard)){
-    computerWinPile.push(playerCard,(computerCard)) 
+    computerWinsPile.push(playerCard,(computerCard)) 
     setMessage('The computer wins the hand!')
     computerWinningPile.classList.remove('outline')
     computerWinningPile.classList.add('back-red')
@@ -155,20 +155,15 @@ function war (){
   checkForWinner()
   redistribute()
   if(checkCardVal(playerWarCards[3]) > checkCardVal(computerWarCards[3])){
-    playerWinPile.push(...playerWarCards, ...computerWarCards)
+    playerWinsPile.push(...playerWarCards, ...computerWarCards)
     setMessage('The Player has won this battle!')
-    console.log('The Player has won this battle!')
-
   } else if(checkCardVal(playerWarCards[3]) < checkCardVal(computerWarCards[3])){
-    computerWinPile.push(...playerWarCards, ...computerWarCards)
+    computerWinsPile.push(...playerWarCards, ...computerWarCards)
     setMessage('The Computer has won this battle!')
-    console.log('The Computer has won this battle!')
   } else{
     war()
     setMessage('You must fight again!')
-    console.log('You must fight again!')
   }
-  console.log(playerWarCards, computerWarCards, playerWinPile, computerWinPile)
 }
 
 function checkForWinner(){
@@ -216,6 +211,9 @@ function render(){
     computerWinningPile.classList.remove('back-red')
     playerWinningPile.classList.add('outline')
     playerWinningPile.classList.remove('back-blue')
+  }
+  if(war){
+
   }
 }
 
