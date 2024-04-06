@@ -31,6 +31,8 @@ const playerCardInPlay = document.getElementById('player-card-inplay')
 const computerCardInPlay = document.getElementById('computer-card-inplay')
 const playerWinningPile = document.getElementById('player-winning-pile')
 const computerWinningPile = document.getElementById('computer-winning-pile')
+const computerWarDraw = document.getElementById('computer-war-container')
+const playerWarDraw = document.getElementById('player-war-container')
 const medievalWar = new Audio('../audio/medievalwar.wav')
 /*----------------- Event Listeners -------------------*/
 
@@ -133,6 +135,7 @@ function compareCards(){
   if (checkCardVal(playerCard) === checkCardVal(computerCard)){
     //Iniates War
     setMessage('WAR has begun!')
+    displayWarCard()
     war()
   }
 }
@@ -157,20 +160,60 @@ function war (){
   if(checkCardVal(playerWarCards[3]) > checkCardVal(computerWarCards[3])){
     playerWinsPile.push(...playerWarCards, ...computerWarCards)
     setMessage('The Player has won this battle!')
+    console.log(playerWinsPile, playerWarCards)
   } else if(checkCardVal(playerWarCards[3]) < checkCardVal(computerWarCards[3])){
     computerWinsPile.push(...playerWarCards, ...computerWarCards)
     setMessage('The Computer has won this battle!')
+    console.log(computerWinsPile, computerWarCards)
   } else{
     war()
     setMessage('You must fight again!')
   }
 }
 
+function displayWarCard(){
+  // playerWarDraw.removeChild(playerNewWarCard1)
+  // playerWarDraw.removeChild(playerNewWarCard2)
+  // playerWarDraw.removeChild(playerNewWarCard3)
+  // computerWarDraw.removeChild(computerNewWarCard1)
+  // computerWarDraw.removeChild(computerNewWarCard2)
+  // computerWarDraw.removeChild(computerNewWarCard3)
+  let playerNewWarCard1 = document.createElement('div')
+  let playerNewWarCard2 = document.createElement('div')
+  let playerNewWarCard3 = document.createElement('div')
+  playerNewWarCard1.className = 'card large back-blue'
+  playerNewWarCard2.className = 'card large back-blue'
+  playerNewWarCard3.className = 'card large back-blue'
+  playerWarDraw.appendChild(playerNewWarCard1)
+  playerWarDraw.appendChild(playerNewWarCard2)
+  playerWarDraw.appendChild(playerNewWarCard3)
+  let computerNewWarCard1 = document.createElement('div')
+  let computerNewWarCard2 = document.createElement('div')
+  let computerNewWarCard3 = document.createElement('div')
+  computerNewWarCard1.className = 'card large back-red'
+  computerNewWarCard2.className = 'card large back-red'
+  computerNewWarCard3.className = 'card large back-red'
+  computerWarDraw.appendChild(computerNewWarCard1)
+  computerWarDraw.appendChild(computerNewWarCard2)
+  computerWarDraw.appendChild(computerNewWarCard3)
+  setTimeout(() => (playerNewWarCard1), 200)
+  setTimeout(() => (playerNewWarCard2), 400)
+  setTimeout(() => (playerNewWarCard3), 600)
+  setTimeout(() => (computerNewWarCard1), 800)
+  setTimeout(() => (computerNewWarCard2), 1000)
+  setTimeout(() => (computerNewWarCard3), 1200)
+}
+
+function clearDisplayWarCards(){
+  playerWarDraw.innerHTML = ''
+  computerWarDraw.innerHTML = ''
+}
+
 function checkForWinner(){
-  if(playerHand.length === 0 && playerWinPile.length === 0){
+  if(playerHand.length === 0 && playerWinsPile.length === 0){
     winner = true
     setMessage('DEFEAT! The computer has won the WAR.')
-  } else if(computerHand.length === 0 && computerWinPile.length === 0){
+  } else if(computerHand.length === 0 && computerWinsPile.length === 0){
     winner = true
     setMessage('VICTORY! The player has won the WAR.')
   } else {
@@ -179,12 +222,12 @@ function checkForWinner(){
 }
 
 function redistribute(){
-  if(playerHand.length === 0 && playerWinPile.length > 0){
-    playerHand = shuffleCards([...playerWinPile])
-    playerWinPile = []
-  } if(computerHand.length === 0 && computerWinPile.length > 0){
-    computerHand = shuffleCards([...computerWinPile])
-    computerWinPile = []
+  if(playerHand.length === 0 && playerWinsPile.length > 0){
+    playerHand = shuffleCards([...playerWinsPile])
+    playerWinsPile = []
+  } if(computerHand.length === 0 && computerWinsPile.length > 0){
+    computerHand = shuffleCards([...computerWinsPile])
+    computerWinsPile = []
   } 
 }
 
