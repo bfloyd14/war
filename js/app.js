@@ -63,7 +63,7 @@ function handleStart(evt){
   gameIsInPlay = true
   gameDeck = generateDecks
   render()
-  messageEl.textContent = 'Press Attack to begin your battle!'
+  messageEl.style.display = 'Press Attack to begin your battle!'
 }
 
 function shuffleCards(cards){
@@ -121,6 +121,7 @@ function checkCardVal(card){
 function compareCards(){
   if(checkCardVal(playerCard) > checkCardVal(computerCard)){
     playerWinsPile.push(playerCard,(computerCard))
+    setTimeout(setMessage, 500)
     setMessage('The player wins the hand!')
     playerWinningPile.classList.remove('outline')
     playerWinningPile.classList.add('back-blue')
@@ -128,6 +129,7 @@ function compareCards(){
   } 
   if (checkCardVal(playerCard) < checkCardVal(computerCard)){
     computerWinsPile.push(playerCard,(computerCard)) 
+    setTimeout(setMessage, 500)
     setMessage('The computer wins the hand!')
     computerWinningPile.classList.remove('outline')
     computerWinningPile.classList.add('back-red')
@@ -135,8 +137,11 @@ function compareCards(){
   if (checkCardVal(playerCard) === checkCardVal(computerCard)){
     //Iniates War
     setMessage('WAR has begun!')
-    displayWarCard()
-    war()
+    setTimeout(displayWarDrawCard, 400)
+    setTimeout(displayWarDrawCard, 800)
+    setTimeout(displayWarDrawCard, 1200)
+    setTimeout()
+    setTimeout(war, 1600)
   }
 }
 
@@ -158,55 +163,40 @@ function war (){
   checkForWinner()
   redistribute()
   if(checkCardVal(playerWarCards[3]) > checkCardVal(computerWarCards[3])){
-    playerWinsPile.push(...playerWarCards, ...computerWarCards)
+    playerWinsPile.push(...playerWarCards, ...
+    computerWarCards)
+    setTimeout(setMessage, 500)
     setMessage('The Player has won this battle!')
     console.log(playerWinsPile, playerWarCards)
   } else if(checkCardVal(playerWarCards[3]) < checkCardVal(computerWarCards[3])){
     computerWinsPile.push(...playerWarCards, ...computerWarCards)
+    setTimeout(setMessage, 500)
     setMessage('The Computer has won this battle!')
     console.log(computerWinsPile, computerWarCards)
   } else{
+    playerWarCards = []
+    computerWarCards = []
     war()
+    setTimeout(setMessage, 500)
     setMessage('You must fight again!')
   }
 }
 
-function displayWarCard(){
-  // playerWarDraw.removeChild(playerNewWarCard1)
-  // playerWarDraw.removeChild(playerNewWarCard2)
-  // playerWarDraw.removeChild(playerNewWarCard3)
-  // computerWarDraw.removeChild(computerNewWarCard1)
-  // computerWarDraw.removeChild(computerNewWarCard2)
-  // computerWarDraw.removeChild(computerNewWarCard3)
+function displayWarDrawCard(){
   let playerNewWarCard1 = document.createElement('div')
-  let playerNewWarCard2 = document.createElement('div')
-  let playerNewWarCard3 = document.createElement('div')
   playerNewWarCard1.className = 'card large back-blue'
-  playerNewWarCard2.className = 'card large back-blue'
-  playerNewWarCard3.className = 'card large back-blue'
   playerWarDraw.appendChild(playerNewWarCard1)
-  playerWarDraw.appendChild(playerNewWarCard2)
-  playerWarDraw.appendChild(playerNewWarCard3)
   let computerNewWarCard1 = document.createElement('div')
-  let computerNewWarCard2 = document.createElement('div')
-  let computerNewWarCard3 = document.createElement('div')
   computerNewWarCard1.className = 'card large back-red'
-  computerNewWarCard2.className = 'card large back-red'
-  computerNewWarCard3.className = 'card large back-red'
   computerWarDraw.appendChild(computerNewWarCard1)
-  computerWarDraw.appendChild(computerNewWarCard2)
-  computerWarDraw.appendChild(computerNewWarCard3)
-  setTimeout(() => (playerNewWarCard1), 200)
-  setTimeout(() => (playerNewWarCard2), 400)
-  setTimeout(() => (playerNewWarCard3), 600)
-  setTimeout(() => (computerNewWarCard1), 800)
-  setTimeout(() => (computerNewWarCard2), 1000)
-  setTimeout(() => (computerNewWarCard3), 1200)
+  setTimeout(clearDisplayWarCards, 3000)
 }
 
 function clearDisplayWarCards(){
   playerWarDraw.innerHTML = ''
   computerWarDraw.innerHTML = ''
+  console.log(playerWarDraw)
+  console.log(computerWarDraw)
 }
 
 function checkForWinner(){
@@ -255,11 +245,7 @@ function render(){
     playerWinningPile.classList.add('outline')
     playerWinningPile.classList.remove('back-blue')
   }
-  if(war){
-
-  }
 }
-
 
 
 
