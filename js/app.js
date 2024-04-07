@@ -108,6 +108,13 @@ function handleDrawButton(){
   compareCards()
 }
 
+function clearCardInPlay (){
+  playerCardInPlay.classList.remove(playerCard)
+  computerCardInPlay.classList.remove(computerCard)
+  playerCardInPlay.classList.add('outline')
+  computerCardInPlay.classList.add('outline')
+}
+
 function checkCardVal(card){
   let cardVal = card.slice(1)
   if(cardVal === 'A') return 14
@@ -126,6 +133,7 @@ function compareCards(){
     playerWinningPile.classList.remove('outline')
     playerWinningPile.classList.add('back-blue')
     console.log(playerCard, computerCard)
+    setTimeout(clearCardInPlay, 500)
   } 
   if (checkCardVal(playerCard) < checkCardVal(computerCard)){
     computerWinsPile.push(playerCard,(computerCard)) 
@@ -140,7 +148,6 @@ function compareCards(){
     setTimeout(displayWarDrawCard, 400)
     setTimeout(displayWarDrawCard, 800)
     setTimeout(displayWarDrawCard, 1200)
-    setTimeout()
     setTimeout(war, 1600)
   }
 }
@@ -189,10 +196,10 @@ function displayWarDrawCard(){
   let computerNewWarCard1 = document.createElement('div')
   computerNewWarCard1.className = 'card large back-red'
   computerWarDraw.appendChild(computerNewWarCard1)
-  setTimeout(clearDisplayWarCards, 3000)
+  setTimeout(clearDisplayWarDrawCards, 3000)
 }
 
-function clearDisplayWarCards(){
+function clearDisplayWarDrawCards(){
   playerWarDraw.innerHTML = ''
   computerWarDraw.innerHTML = ''
   console.log(playerWarDraw)
