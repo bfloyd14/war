@@ -64,11 +64,21 @@ function setMessage(message){
 function handleStart(evt){
   medievalWar.volume = .05
   medievalWar.play()
+  setTimeout(stopMusic, 3000)
+  resetMusic()
   gameIsInPlay = true
   gameDeck = generateDecks
   render()
-  
 }
+
+function stopMusic(){
+  medievalWar.pause()
+}
+
+function resetMusic(){
+    medievalWar.currentTime = 0
+  }
+
 
 function shuffleCards(cards){
   let shuffledCards = []
@@ -135,6 +145,7 @@ function compareCards(){
   if(checkCardVal(playerCard) > checkCardVal(computerCard)){
     playerWinsPile.push(playerCard,(computerCard))
     // setTimeout(setMessage, 1000)
+    console.log(playerHand, playerWinsPile, computerHand, computerWinsPile)
     setMessage('The player wins the hand!')
     playerWinningPile.classList.remove('outline')
     playerWinningPile.classList.add('back-blue')
@@ -219,8 +230,8 @@ function clearDisplayWarDrawCards(){
 function updateScore(){
   let playerScoreTotal = playerWinsPile.length + playerHand.length
   let computerScoreTotal = computerWinsPile.length + computerHand.length
-  playerScore.textContent = 'Player Cards: ' + playerScoreTotal 
-  computerScore.textContent = 'Computer Cards: ' + computerScoreTotal 
+  playerScore.textContent = 'Player Cards: ' + `${playerScoreTotal}` 
+  computerScore.textContent = 'Computer Cards: ' + `${computerScoreTotal}` 
   console.log(playerScoreTotal, computerScoreTotal)
 }
 
