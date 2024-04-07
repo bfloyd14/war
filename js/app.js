@@ -53,6 +53,7 @@ function init(){
   playerHand = []
   computerHand = []
   generateDecks()
+  resetScore()
   render()
 }
 
@@ -220,6 +221,12 @@ function updateScore(){
   let computerScoreTotal = computerWinsPile.length + computerHand.length
   playerScore.textContent = 'Player Cards: ' + playerScoreTotal 
   computerScore.textContent = 'Computer Cards: ' + computerScoreTotal 
+  console.log(playerScoreTotal, computerScoreTotal)
+}
+
+function resetScore(){
+  playerScore.innerHTML = 'Player Cards: 26'
+  computerScore.innerHTML = 'Computer Cards: 26 '
 }
 
 function checkForWinner(){
