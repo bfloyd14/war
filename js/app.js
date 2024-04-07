@@ -10,6 +10,7 @@ let playerWinsPile = [], computerWinsPile = []
 let winner, choseCountry
 let cardVal
 let playerWarCards = [], computerWarCards = []
+let playerScoreTotal, computerScoreTotal
 // Use a variable name playerCountry to determine which civilization is chosen
 // Stretch goal - have a drop down box to pick a country
 // Default country would be Vikings
@@ -33,6 +34,8 @@ const playerWinningPile = document.getElementById('player-winning-pile')
 const computerWinningPile = document.getElementById('computer-winning-pile')
 const computerWarDraw = document.getElementById('computer-war-container')
 const playerWarDraw = document.getElementById('player-war-container')
+const playerScore = document.getElementById('player-score')
+const computerScore = document.getElementById('computer-score')
 const medievalWar = new Audio('../audio/medievalwar.wav')
 /*----------------- Event Listeners -------------------*/
 
@@ -63,7 +66,7 @@ function handleStart(evt){
   gameIsInPlay = true
   gameDeck = generateDecks
   render()
-  messageEl.style.display = 'Press Attack to begin your battle!'
+  
 }
 
 function shuffleCards(cards){
@@ -95,6 +98,7 @@ function generateDecks(){
 }
 
 function handleDrawButton(){
+  // clearCardInPlay()
   checkForWinner()
   redistribute()
   playerCardInPlay.classList.remove(playerCard)
@@ -126,21 +130,23 @@ function checkCardVal(card){
 }
 
 function compareCards(){
+  setMessage.innerHTML = ''
   if(checkCardVal(playerCard) > checkCardVal(computerCard)){
     playerWinsPile.push(playerCard,(computerCard))
-    setTimeout(setMessage, 500)
+    // setTimeout(setMessage, 1000)
     setMessage('The player wins the hand!')
     playerWinningPile.classList.remove('outline')
     playerWinningPile.classList.add('back-blue')
     console.log(playerCard, computerCard)
-    setTimeout(clearCardInPlay, 500)
+    updateScore()
   } 
   if (checkCardVal(playerCard) < checkCardVal(computerCard)){
     computerWinsPile.push(playerCard,(computerCard)) 
-    setTimeout(setMessage, 500)
+    // setTimeout(setMessage, 1000)
     setMessage('The computer wins the hand!')
     computerWinningPile.classList.remove('outline')
     computerWinningPile.classList.add('back-red')
+    updateScore()
   } 
   if (checkCardVal(playerCard) === checkCardVal(computerCard)){
     //Iniates War
@@ -172,20 +178,23 @@ function war (){
   if(checkCardVal(playerWarCards[3]) > checkCardVal(computerWarCards[3])){
     playerWinsPile.push(...playerWarCards, ...
     computerWarCards)
-    setTimeout(setMessage, 500)
+    // setTimeout(setMessage, 1200)
     setMessage('The Player has won this battle!')
+    updateScore()
     console.log(playerWinsPile, playerWarCards)
   } else if(checkCardVal(playerWarCards[3]) < checkCardVal(computerWarCards[3])){
     computerWinsPile.push(...playerWarCards, ...computerWarCards)
-    setTimeout(setMessage, 500)
+    // setTimeout(setMessage, 1200)
     setMessage('The Computer has won this battle!')
+    updateScore()
     console.log(computerWinsPile, computerWarCards)
   } else{
     playerWarCards = []
     computerWarCards = []
     war()
-    setTimeout(setMessage, 500)
+    setTimeout(setMessage, 1200)
     setMessage('You must fight again!')
+    updateScore()
   }
 }
 
@@ -204,6 +213,13 @@ function clearDisplayWarDrawCards(){
   computerWarDraw.innerHTML = ''
   console.log(playerWarDraw)
   console.log(computerWarDraw)
+}
+
+function updateScore(){
+  let playerScoreTotal = playerWinsPile.length + playerHand.length
+  let computerScoreTotal = computerWinsPile.length + computerHand.length
+  playerScore.textContent = 'Player Cards: ' + playerScoreTotal 
+  computerScore.textContent = 'Computer Cards: ' + computerScoreTotal 
 }
 
 function checkForWinner(){
@@ -239,6 +255,7 @@ function render(){
     computerWinningPile.classList.remove('back-red')
     playerWinningPile.classList.add('outline')
     playerWinningPile.classList.remove('back-blue')
+    setMessage('Press Attack to begin your battle!')
   } else {
     reset.style.display = 'none'
     attackBtn.style.display = 'none'
