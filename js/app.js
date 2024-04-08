@@ -135,7 +135,7 @@ function checkCardVal(card){
 function compareCards(){
   setMessage.innerHTML = ''
   if(checkCardVal(playerCard) > checkCardVal(computerCard)){
-    playerWinsPile.push(playerCard,(computerCard))
+    playerWinsPile.push(playerCard,computerCard)
     // setTimeout(setMessage, 1000)
     setMessage('The player wins the hand!')
     playerWinningPile.classList.remove('outline')
@@ -143,7 +143,7 @@ function compareCards(){
     updateScore()
   } 
   if (checkCardVal(playerCard) < checkCardVal(computerCard)){
-    computerWinsPile.push(playerCard,(computerCard)) 
+    computerWinsPile.push(playerCard,computerCard) 
     // setTimeout(setMessage, 1000)
     setMessage('The computer wins the hand!')
     computerWinningPile.classList.remove('outline')
@@ -167,24 +167,22 @@ function war (){
   redistribute()
   let playerWarCards = playerHand.splice(0,4) 
   playerCardInPlay.classList.remove(playerCard)
-  playerCard = playerWarCards[3]
   playerCardInPlay.classList.add(playerCard)
   checkForWinner()
   redistribute()
   let computerWarCards = computerHand.splice(0,4)
   computerCardInPlay.classList.remove(computerCard)
-  computerCard = computerWarCards[3]
   computerCardInPlay.classList.add(computerCard)
   console.log(playerWarCards, computerWarCards)
   checkForWinner()
   redistribute()
   if(checkCardVal(playerWarCards[3]) > checkCardVal(computerWarCards[3])){
     playerWinsPile.push(...playerWarCards, ...
-    computerWarCards)
+    computerWarCards, playerCard, computerCard)
     setMessage('The Player has won this battle!')
     updateScore()
   } else if(checkCardVal(playerWarCards[3]) < checkCardVal(computerWarCards[3])){
-    computerWinsPile.push(...playerWarCards, ...computerWarCards)
+    computerWinsPile.push(...playerWarCards, ...computerWarCards, playerCard, computerCard)
     setMessage('The Computer has won this battle!')
     updateScore()
   } else{
