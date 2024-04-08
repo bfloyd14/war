@@ -113,10 +113,6 @@ function handleDrawButton(){
   computerCardInPlay.classList.add(computerCard)
   computerCardInPlay.classList.remove('outline')
   compareCards()
-  console.log(playerHand, computerHand)
-  console.log(playerCard, computerCard)
-  console.log(playerWinsPile, computerWinsPile)
-  console.log(playerWarCards, computerWarCards)
 }
 
 function clearCardInPlay (){
@@ -140,7 +136,6 @@ function compareCards(){
   setMessage.innerHTML = ''
   if(checkCardVal(playerCard) > checkCardVal(computerCard)){
     playerWinsPile.push(playerCard,computerCard)
-    // setTimeout(setMessage, 1000)
     setMessage('The player wins the hand!')
     playerWinningPile.classList.remove('outline')
     playerWinningPile.classList.add('back-blue')
@@ -148,7 +143,6 @@ function compareCards(){
   } 
   if (checkCardVal(playerCard) < checkCardVal(computerCard)){
     computerWinsPile.push(playerCard,computerCard) 
-    // setTimeout(setMessage, 1000)
     setMessage('The computer wins the hand!')
     computerWinningPile.classList.remove('outline')
     computerWinningPile.classList.add('back-red')
@@ -177,7 +171,6 @@ function war (){
   let computerWarCards = computerHand.splice(0,4)
   computerCardInPlay.classList.remove(computerCard)
   computerCardInPlay.classList.add(computerCard)
-  console.log(playerWarCards, computerWarCards)
   checkForWinner()
   redistribute()
   if(checkCardVal(playerWarCards[3]) > checkCardVal(computerWarCards[3])){
