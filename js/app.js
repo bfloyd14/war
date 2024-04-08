@@ -113,6 +113,10 @@ function handleDrawButton(){
   computerCardInPlay.classList.add(computerCard)
   computerCardInPlay.classList.remove('outline')
   compareCards()
+  console.log(playerHand, computerHand)
+  console.log(playerCard, computerCard)
+  console.log(playerWinsPile, computerWinsPile)
+  console.log(playerWarCards, computerWarCards)
 }
 
 function clearCardInPlay (){
@@ -216,8 +220,8 @@ function updateScore(){
 }
 
 function resetScore(){
-  playerScore.innerHTML = 'Player Cards: 26' 
-  computerScore.innerHTML = 'Computer Cards: 26' 
+  playerScore.innerHTML = 'Player Cards:' + `${playerHand.length}`
+  computerScore.innerHTML = 'Computer Cards:' + `${computerHand.length}`
 }
 
 function checkForWinner(){
@@ -233,12 +237,12 @@ function checkForWinner(){
 }
 
 function redistribute(){
-  if(playerHand.length < 4 && playerWinsPile.length >= 1){
+  if(playerHand.length < 5 ){
     playerHand = shuffleCards([...playerWinsPile])
     playerWinsPile = []
     cardShuffle.volume = .1
     cardShuffle.play()
-  } if(computerHand.length < 4 && computerWinsPile.length >= 1){
+  } if(computerHand.length < 5 ){
     computerHand = shuffleCards([...computerWinsPile])
     computerWinsPile = []
     cardShuffle.volume = .1
