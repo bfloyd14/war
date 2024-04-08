@@ -10,7 +10,7 @@ let playerWinsPile = [], computerWinsPile = []
 let winner, choseCountry
 let cardVal
 let playerWarCards = [], computerWarCards = []
-let playerScoreTotal, computerScoreTotal
+let playerScoreTotal, computerScoreTotal 
 // Use a variable name playerCountry to determine which civilization is chosen
 // Stretch goal - have a drop down box to pick a country
 // Default country would be Vikings
@@ -87,7 +87,6 @@ function shuffleCards(cards){
     let randIdx = Math.floor(Math.random()* cards.length)
     shuffledCards.push(cards.splice(randIdx, 1)[0])
   }
-  // console.log(shuffledCards)
   return shuffledCards
 }
 
@@ -131,13 +130,13 @@ function clearCardInPlay (){
 }
 
 function checkCardVal(card){
+  
   let cardVal = card.slice(1)
   if(cardVal === 'A') return 14
   if(cardVal === 'K') return 13
   if(cardVal === 'Q') return 12
   if(cardVal === 'J') return 11
   return parseInt(cardVal)
-  console.log(cardVal(playerCard, computerCard))
 }
 
 function compareCards(){
@@ -145,11 +144,9 @@ function compareCards(){
   if(checkCardVal(playerCard) > checkCardVal(computerCard)){
     playerWinsPile.push(playerCard,(computerCard))
     // setTimeout(setMessage, 1000)
-    console.log(playerHand, playerWinsPile, computerHand, computerWinsPile)
     setMessage('The player wins the hand!')
     playerWinningPile.classList.remove('outline')
     playerWinningPile.classList.add('back-blue')
-    console.log(playerCard, computerCard)
     updateScore()
   } 
   if (checkCardVal(playerCard) < checkCardVal(computerCard)){
@@ -168,23 +165,22 @@ function compareCards(){
     setTimeout(displayWarDrawCard, 1200)
     setTimeout(war, 1600)
   }
+  console.log(playerHand, playerWinsPile, computerHand, computerWinsPile)
 }
 
 function war (){
   checkForWinner()
   redistribute()
-  let playerWarCards = playerHand.slice(0,4) 
+  let playerWarCards = playerHand.splice(0,4) 
   playerCardInPlay.classList.remove(playerCard)
   playerCard = playerWarCards[3]
   playerCardInPlay.classList.add(playerCard)
-  console.log(playerWarCards)
   checkForWinner()
   redistribute()
-  let computerWarCards = computerHand.slice(0,4)
+  let computerWarCards = computerHand.splice(0,4)
   computerCardInPlay.classList.remove(computerCard)
   computerCard = computerWarCards[3]
   computerCardInPlay.classList.add(computerCard)
-  console.log(computerWarCards)
   checkForWinner()
   redistribute()
   if(checkCardVal(playerWarCards[3]) > checkCardVal(computerWarCards[3])){
@@ -193,13 +189,11 @@ function war (){
     // setTimeout(setMessage, 1200)
     setMessage('The Player has won this battle!')
     updateScore()
-    console.log(playerWinsPile, playerWarCards)
   } else if(checkCardVal(playerWarCards[3]) < checkCardVal(computerWarCards[3])){
     computerWinsPile.push(...playerWarCards, ...computerWarCards)
     // setTimeout(setMessage, 1200)
     setMessage('The Computer has won this battle!')
     updateScore()
-    console.log(computerWinsPile, computerWarCards)
   } else{
     playerWarCards = []
     computerWarCards = []
@@ -208,6 +202,7 @@ function war (){
     setMessage('You must fight again!')
     updateScore()
   }
+  console.log(playerHand, playerWinsPile, computerHand, computerWinsPile)
 }
 
 function displayWarDrawCard(){
@@ -223,40 +218,38 @@ function displayWarDrawCard(){
 function clearDisplayWarDrawCards(){
   playerWarDraw.innerHTML = ''
   computerWarDraw.innerHTML = ''
-  console.log(playerWarDraw)
-  console.log(computerWarDraw)
 }
 
 function updateScore(){
-  let playerScoreTotal = playerWinsPile.length + playerHand.length
-  let computerScoreTotal = computerWinsPile.length + computerHand.length
+  playerScoreTotal = playerWinsPile.length + playerHand.length
+  computerScoreTotal = computerWinsPile.length + computerHand.length
   playerScore.textContent = 'Player Cards: ' + `${playerScoreTotal}` 
   computerScore.textContent = 'Computer Cards: ' + `${computerScoreTotal}` 
   console.log(playerScoreTotal, computerScoreTotal)
 }
 
 function resetScore(){
-  playerScore.innerHTML = 'Player Cards: 26'
-  computerScore.innerHTML = 'Computer Cards: 26 '
+  playerScore.innerHTML = 'Player Cards: 26' 
+  computerScore.innerHTML = 'Computer Cards: 26' 
 }
 
 function checkForWinner(){
   if(playerHand.length === 0 && playerWinsPile.length === 0){
     winner = true
-    setMessage('DEFEAT! The computer has won the WAR.')
+    setMessage('DEFEAT! The computer is victorious!')
   } else if(computerHand.length === 0 && computerWinsPile.length === 0){
     winner = true
-    setMessage('VICTORY! The player has won the WAR.')
+    setMessage('VICTORY! The player has won!')
   } else {
     winner = false
   }
 }
 
 function redistribute(){
-  if(playerHand.length === 0 && playerWinsPile.length > 0){
+  if(playerHand.length < 4 && playerWinsPile.length > 0){
     playerHand = shuffleCards([...playerWinsPile])
     playerWinsPile = []
-  } if(computerHand.length === 0 && computerWinsPile.length > 0){
+  } if(computerHand.length < 4 && computerWinsPile.length > 0){
     computerHand = shuffleCards([...computerWinsPile])
     computerWinsPile = []
   } 
