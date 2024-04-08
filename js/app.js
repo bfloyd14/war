@@ -4,20 +4,13 @@ const allCards = ["dA","dK","dQ","dJ","d10","d09","d08","d07","d06","d05","d04",
 
 /*----------------- Variables ---------------------*/
 let gameIsInPlay
-let playerHand, computerHand
+let playerHand = [], computerHand = []
 let playerCard, computerCard 
 let playerWinsPile = [], computerWinsPile = []
-let winner, choseCountry
+let winner
 let cardVal
 let playerWarCards = [], computerWarCards = []
 let playerScoreTotal, computerScoreTotal 
-// Use a variable name playerCountry to determine which civilization is chosen
-// Stretch goal - have a drop down box to pick a country
-// Default country would be Vikings
-// Use a variable name computerCountry to determine which civilization is chosen
-// Stretch goal - randomized
-// Default country would be the English
-
 
 /*------------ Cached Element References -----------*/
 
@@ -37,12 +30,14 @@ const playerWarDraw = document.getElementById('player-war-container')
 const playerScore = document.getElementById('player-score')
 const computerScore = document.getElementById('computer-score')
 const medievalWar = new Audio('../audio/medievalwar.wav')
+const cardFlip = new Audio('../audio/cardflip.wav')
+const cardShuffle = new Audio('../audio/cardshuffle.mp3')
 /*----------------- Event Listeners -------------------*/
 
 attackBtn.addEventListener('click', handleDrawButton)
 resetBtn.addEventListener('click', init)
 startBtn.addEventListener('click', handleStart)
-// 8) Create a score display for each player keeping track of cards won
+
 
 /*------------------- Functions ----------------------*/
 init()
@@ -50,9 +45,6 @@ init()
 function init(){
   gameIsInPlay = false
   winner = false
-  playerHand = []
-  computerHand = []
-  generateDecks()
   resetScore()
   render()
 }
@@ -67,7 +59,7 @@ function handleStart(evt){
   setTimeout(stopMusic, 3000)
   resetMusic()
   gameIsInPlay = true
-  gameDeck = generateDecks
+  generateDecks()
   render()
 }
 
@@ -108,7 +100,8 @@ function generateDecks(){
 }
 
 function handleDrawButton(){
-  // clearCardInPlay()
+  cardFlip.volume = .1
+  cardFlip.play()
   checkForWinner()
   redistribute()
   playerCardInPlay.classList.remove(playerCard)
@@ -130,7 +123,7 @@ function clearCardInPlay (){
 }
 
 function checkCardVal(card){
-  
+  redistribute()
   let cardVal = card.slice(1)
   if(cardVal === 'A') return 14
   if(cardVal === 'K') return 13
@@ -158,14 +151,15 @@ function compareCards(){
     updateScore()
   } 
   if (checkCardVal(playerCard) === checkCardVal(computerCard)){
-    //Iniates War
+    cardFlip.volume = .1
+    cardFlip.play()
     setMessage('WAR has begun!')
     setTimeout(displayWarDrawCard, 400)
     setTimeout(displayWarDrawCard, 800)
     setTimeout(displayWarDrawCard, 1200)
     setTimeout(war, 1600)
+    
   }
-  console.log(playerHand, playerWinsPile, computerHand, computerWinsPile)
 }
 
 function war (){
@@ -181,28 +175,24 @@ function war (){
   computerCardInPlay.classList.remove(computerCard)
   computerCard = computerWarCards[3]
   computerCardInPlay.classList.add(computerCard)
+  console.log(playerWarCards, computerWarCards)
   checkForWinner()
   redistribute()
   if(checkCardVal(playerWarCards[3]) > checkCardVal(computerWarCards[3])){
     playerWinsPile.push(...playerWarCards, ...
     computerWarCards)
-    // setTimeout(setMessage, 1200)
     setMessage('The Player has won this battle!')
     updateScore()
   } else if(checkCardVal(playerWarCards[3]) < checkCardVal(computerWarCards[3])){
     computerWinsPile.push(...playerWarCards, ...computerWarCards)
-    // setTimeout(setMessage, 1200)
     setMessage('The Computer has won this battle!')
     updateScore()
   } else{
-    playerWarCards = []
-    computerWarCards = []
     war()
     setTimeout(setMessage, 1200)
     setMessage('You must fight again!')
     updateScore()
   }
-  console.log(playerHand, playerWinsPile, computerHand, computerWinsPile)
 }
 
 function displayWarDrawCard(){
@@ -225,7 +215,6 @@ function updateScore(){
   computerScoreTotal = computerWinsPile.length + computerHand.length
   playerScore.textContent = 'Player Cards: ' + `${playerScoreTotal}` 
   computerScore.textContent = 'Computer Cards: ' + `${computerScoreTotal}` 
-  console.log(playerScoreTotal, computerScoreTotal)
 }
 
 function resetScore(){
@@ -246,12 +235,16 @@ function checkForWinner(){
 }
 
 function redistribute(){
-  if(playerHand.length < 4 && playerWinsPile.length > 0){
+  if(playerHand.length < 4 && playerWinsPile.length >= 1){
     playerHand = shuffleCards([...playerWinsPile])
     playerWinsPile = []
-  } if(computerHand.length < 4 && computerWinsPile.length > 0){
+    cardShuffle.volume = .1
+    cardShuffle.play()
+  } if(computerHand.length < 4 && computerWinsPile.length >= 1){
     computerHand = shuffleCards([...computerWinsPile])
     computerWinsPile = []
+    cardShuffle.volume = .1
+    cardShuffle.play()
   } 
 }
 
@@ -284,43 +277,3 @@ function render(){
 
 
 
-
-
-
-// 3) Upon loading, the game state should be initialized, and a function should be 
-//    called to render this game state
-// Call a function named init upon loading of game
-// The init function will always be used for the game reset
-// Call a function name render at the end of the init function
-// The render function can be used in other functions
-// 4) The state of the game should be rendered to the user
-// Create a function called render
-// Create a function called updateMessage 
-// Displays new messages based on what the state of the game is:
-// Start
-// Play card
-// Evaluate winner
-// War
-// Double ware
-// Defeat
-// Create a function called handleClick to play a card from player deck and a card from computer deck
-// Create a compareCard function that evaluates the player card and computer card
-// 5) Define the required constants
-
-//  The cards played are evaluating for a winner, if both cards have the same value, then initiate war which add 3 cards face down then a 4th card is flipped over and evaluated for a winner, if player or computer does not have 4 cards in unusedCardDeck then the other player wins.  If both cards have the same value, then initiate double war,  if player or computer does not have 4 cards in unusedCardDeck then the other player wins.
-// Run checkForWinner variable to see if any player has no cards remaining
-// 7) Create Reset functionality
-// 9) Adding sound effects for actions of the game
-// Country selection (Player default Vikings)
-// When a card is played
-// When there is a War
-// When there is a Double War
-// When you forfeit
-// Victory
-
-
-// BONUS
-// 10) Create a drop down box for Country/Civilization selection (BONUS FEATURE)
-// User can select a country from a drop down box
-// When specific country is selected, it changes the theme of the cards
-// The computer Country is randomly selected
