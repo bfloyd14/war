@@ -21,7 +21,7 @@ Background on the Age of Empire theme, it was a strategy game that I played arou
 - [Sound Effects from freesound](https://freesound.org)
 - [Background pattern from heropatterns](https://heropatterns.com)
 - CSS cardstarter from GA SEI git repo
-- Favicon image created by Juan Ramirez
+- Favicon image created by [Juan Ramirez](https://github.com/juanrw7)
 - Age of Empires image is from Goo
 
 ## Icebox Items
