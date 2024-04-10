@@ -69,6 +69,8 @@ h1 {
 #computer-war-container {
   display: flex;
   justify-content: center;
+  background-color: rgb(11, 241, 42);
+  height: 125px;
 }
 
 .card-container {
@@ -76,16 +78,15 @@ h1 {
   background-color: aqua;
   justify-content: center;
   align-items: center;
-  margin: 0 100px;
 }
 
 #player-war-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 10%;
-  background-color: aqua;
-  margin: 0 450px 0 450px;
+  background-color: rgb(6, 122, 68);
+  height: 125px;
+
 }
 
 .player-win-container {
@@ -93,7 +94,7 @@ h1 {
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 40px 0 0 0; 
+  /* padding: 40px 0 0 0;  */
 }
 
 .button-container {
