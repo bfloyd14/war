@@ -158,6 +158,7 @@ function compareCards(){
     setTimeout(war, 1600)
     
   }
+  console.log(playerHand, playerWinsPile, computerHand, computerWinsPile)
 }
 
 function war (){
@@ -165,11 +166,13 @@ function war (){
   redistribute()
   let playerWarCards = playerHand.splice(0,4) 
   playerCardInPlay.classList.remove(playerCard)
+  playerCardInPlay.classList.remove(playerWarCards[3])
   playerCardInPlay.classList.add(playerWarCards[3])
   checkForWinner()
   redistribute()
   let computerWarCards = computerHand.splice(0,4)
   computerCardInPlay.classList.remove(computerCard)
+  computerCardInPlay.classList.remove(computerWarCards[3])
   computerCardInPlay.classList.add(computerWarCards[3])
   checkForWinner()
   redistribute()
@@ -231,12 +234,12 @@ function checkForWinner(){
 
 function redistribute(){
   if(playerHand.length < 5 ){
-    playerHand = shuffleCards([...playerWinsPile])
+    playerHand = shuffleCards([...playerWinsPile, ...playerHand])
     playerWinsPile = []
     cardShuffle.volume = .1
     cardShuffle.play()
   } if(computerHand.length < 5 ){
-    computerHand = shuffleCards([...computerWinsPile])
+    computerHand = shuffleCards([...computerWinsPile, ...computerHand])
     computerWinsPile = []
     cardShuffle.volume = .1
     cardShuffle.play()
