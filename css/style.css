@@ -22,7 +22,7 @@ img {
 }
 
 h1 {
-  font-size: 48px;
+  font-size: 38px;
   display: flex;
   justify-content: center;
   width: 90%;
@@ -34,7 +34,7 @@ h1 {
   align-items: center;
   width: 100%;
   height: 10%;
-
+  padding: 15px;
 }
 
 #message {
@@ -47,6 +47,7 @@ h1 {
   justify-content: center;
   align-items: center;
   width: 100%;
+  padding: 32px 0 0 0;
 }
 
 #start {
@@ -59,10 +60,11 @@ h1 {
 }
 
 .computer-win-container {
-  display: flex;
-  justify-content: flex-end;
+  display: inline-flex;
+  justify-content: center;
   align-items: center;
   width: 100%; 
+  padding: 40px 0 0 0;
 }
 #computer-war-container {
   display: flex;
@@ -70,9 +72,10 @@ h1 {
 }
 
 .card-container {
-  display: flex;
-  justify-content: space-evenly;
+  display: inline-flex;
+  justify-content: center;
   align-items: center;
+  margin-left: 700px;
 }
 
 #player-war-container {
@@ -81,15 +84,16 @@ h1 {
 }
 
 .player-win-container {
-  display: flex;
-  justify-content: flex-start;
+  display: inline-flex;
+  justify-content: center;
   align-items: center;
-  width: 100%; 
+  width: 100%;
+  padding: 40px 0 0 0; 
 }
 
 .button-container {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   padding: 0px 100px 0px 100px
 }
 
