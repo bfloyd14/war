@@ -76,12 +76,16 @@ h1 {
   background-color: aqua;
   justify-content: center;
   align-items: center;
-  margin: 0 450px 0 450px;
+  margin: 0 100px;
 }
 
 #player-war-container {
   display: flex;
   justify-content: center;
+  align-items: center;
+  height: 10%;
+  background-color: aqua;
+  margin: 0 450px 0 450px;
 }
 
 .player-win-container {

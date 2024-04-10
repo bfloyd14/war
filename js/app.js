@@ -100,7 +100,6 @@ function generateDecks(){
 }
 
 function handleDrawButton(){
-  clearDisplayWarDrawCards()
   cardFlip.volume = .1
   cardFlip.play()
   checkForWinner()
@@ -167,13 +166,11 @@ function war (){
   redistribute()
   let playerWarCards = playerHand.splice(0,4) 
   playerCardInPlay.classList.remove(playerCard)
-  playerCardInPlay.classList.remove(playerWarCards[3])
   playerCardInPlay.classList.add(playerWarCards[3])
   checkForWinner()
   redistribute()
   let computerWarCards = computerHand.splice(0,4)
   computerCardInPlay.classList.remove(computerCard)
-  computerCardInPlay.classList.remove(computerWarCards[3])
   computerCardInPlay.classList.add(computerWarCards[3])
   checkForWinner()
   redistribute()
@@ -192,6 +189,7 @@ function war (){
     setMessage('You must fight again!')
     updateScore()
   }
+  clearDisplayWarDrawCards()
 }
 
 function displayWarDrawCard(){
@@ -201,16 +199,13 @@ function displayWarDrawCard(){
   let computerNewWarCard1 = document.createElement('div')
   computerNewWarCard1.className = 'card large back-red'
   computerWarDraw.appendChild(computerNewWarCard1)
-  setTimeout(clearDisplayWarDrawCards, 3000)
 }
 
 function clearDisplayWarDrawCards(){
-  playerWarDraw.innerHTML = ''
-  computerWarDraw.innerHTML = ''
-  playerCardInPlay.innerHTML = ''
-  computerCardInPlay.innerHTML = ''
-  playerCardInPlay.classList.remove(playerWarCards[3])
   computerCardInPlay.classList.remove(computerWarCards[3])
+  playerCardInPlay.classList.remove(playerWarCards[3])
+  playerCardInPlay.classList.add('outline')
+  computerCardInPlay.classList.add('outline')
 }
 
 function updateScore(){
@@ -257,6 +252,7 @@ function handleReset(evt){
   clearCardInPlay()
   playerWinsPile = []
   computerWinsPile = []
+
 }
 
 function render(){
