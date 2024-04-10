@@ -246,11 +246,9 @@ function redistribute(){
 
 function handleReset(evt){
   init()
-  clearDisplayWarDrawCards()
   clearCardInPlay()
-  playerWinsPile = []
-  computerWinsPile = []
-
+  playerWinningPile.className = 'card large outline'
+  computerWinningPile.className = 'card large outline'
 }
 
 function render(){
