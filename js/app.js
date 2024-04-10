@@ -35,7 +35,7 @@ const cardShuffle = new Audio('../audio/cardshuffle.mp3')
 /*----------------- Event Listeners -------------------*/
 
 attackBtn.addEventListener('click', handleDrawButton)
-resetBtn.addEventListener('click', init)
+resetBtn.addEventListener('click', handleReset)
 startBtn.addEventListener('click', handleStart)
 
 
@@ -100,6 +100,7 @@ function generateDecks(){
 }
 
 function handleDrawButton(){
+  clearDisplayWarDrawCards()
   cardFlip.volume = .1
   cardFlip.play()
   checkForWinner()
@@ -206,6 +207,10 @@ function displayWarDrawCard(){
 function clearDisplayWarDrawCards(){
   playerWarDraw.innerHTML = ''
   computerWarDraw.innerHTML = ''
+  playerCardInPlay.innerHTML = ''
+  computerCardInPlay.innerHTML = ''
+  playerCardInPlay.classList.remove(playerWarCards[3])
+  computerCardInPlay.classList.remove(computerWarCards[3])
 }
 
 function updateScore(){
@@ -216,8 +221,8 @@ function updateScore(){
 }
 
 function resetScore(){
-  playerScore.innerHTML = 'Player Cards:' + `${playerHand.length}`
-  computerScore.innerHTML = 'Computer Cards:' + `${computerHand.length}`
+  playerScore.innerHTML = 'Player Cards: ' + `${playerHand.length}` 
+  computerScore.innerHTML = 'Computer Cards: ' + `${computerHand.length}` 
 }
 
 function checkForWinner(){
@@ -246,6 +251,14 @@ function redistribute(){
   } 
 }
 
+function handleReset(evt){
+  init()
+  clearDisplayWarDrawCards()
+  clearCardInPlay()
+  playerWinsPile = []
+  computerWinsPile = []
+}
+
 function render(){
   if(gameIsInPlay){
     startBtn.style.display = 'none'
@@ -262,14 +275,7 @@ function render(){
     reset.style.display = 'none'
     attackBtn.style.display = 'none'
     startBtn.style.display = ''
-    playerCardInPlay.classList.remove(playerCard)
-    computerCardInPlay.classList.remove(computerCard)
-    computerCardInPlay.classList.add('outline')
-    playerCardInPlay.classList.add('outline')
-    computerWinningPile.classList.add('outline')
-    computerWinningPile.classList.remove('back-red')
-    playerWinningPile.classList.add('outline')
-    playerWinningPile.classList.remove('back-blue')
+  
   }
 }
 

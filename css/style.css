@@ -72,10 +72,11 @@ h1 {
 }
 
 .card-container {
-  display: inline-flex;
+  display: flex;
+  background-color: aqua;
   justify-content: center;
   align-items: center;
-  margin-left: 700px;
+  margin: 0 450px 0 450px;
 }
 
 #player-war-container {
