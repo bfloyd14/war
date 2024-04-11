@@ -47,6 +47,10 @@ function init(){
   playerCardInPlay.className = 'card large outline'
   computerCardInPlay.className = 'card large outline'
   winner = false
+  playerWinsPile = []
+  computerWinsPile = []
+  playerHand = []
+  computerHand = []
   resetScore()
   render()
 }
@@ -102,10 +106,9 @@ function generateDecks(){
 }
 
 function handleDrawButton(){
+  clearWarCards()
   playerCardInPlay.className = 'card large outline'
   computerCardInPlay.className = 'card large outline'
-  playerWarDraw.innerHTML = ''
-  computerWarDraw.innerHTML = ''
   cardFlip.volume = .1
   cardFlip.play()
   checkForWinner()
@@ -211,6 +214,15 @@ function displayWarDrawCard(){
   computerWarDraw.appendChild(computerNewWarCard1)
 }
 
+function clearWarCards(){
+  playerCardInPlay.className = 'card large outline'
+  computerCardInPlay.className = 'card large outline'
+  playerWarDraw.innerHTML = ''
+  computerWarDraw.innerHTML = ''
+  playerWarCards = []
+  computerWarCards = []
+}
+
 function updateScore(){
   playerScoreTotal = playerWinsPile.length + playerHand.length
   computerScoreTotal = computerWinsPile.length + computerHand.length
@@ -251,9 +263,12 @@ function redistribute(){
 
 function handleReset(evt){
   init()
+  clearWarCards()
   clearCardInPlay()
   playerWinningPile.className = 'card large outline'
   computerWinningPile.className = 'card large outline'
+  
+
 }
 
 function render(){
