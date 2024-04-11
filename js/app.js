@@ -102,6 +102,8 @@ function generateDecks(){
 }
 
 function handleDrawButton(){
+  playerCardInPlay.className = 'card large outline'
+  computerCardInPlay.className = 'card large outline'
   playerWarDraw.innerHTML = ''
   computerWarDraw.innerHTML = ''
   cardFlip.volume = .1
