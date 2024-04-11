@@ -9,11 +9,12 @@ body {
 }
 
 nav {
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  /* align-items: center; */
   background-color: rgb(203, 187, 136);
   width: 100%;
-  text-align: center;
+  /* justify-content: space-between; */
   border-radius: 10px;
 }
 
@@ -22,10 +23,9 @@ img {
 }
 
 h1 {
-  font-size: 38px;
   display: flex;
   justify-content: center;
-  width: 90%;
+  font-size: 38px;
 }
 
 .message-container {
@@ -38,6 +38,7 @@ h1 {
 #message {
   font-size: 32px;
   font-weight: bold;
+  text-align: center;
 }
 
 .computer-win-container {

@@ -153,8 +153,6 @@ function compareCards(){
     updateScore()
   } 
   if (checkCardVal(playerCard) === checkCardVal(computerCard)){
-    cardFlip.volume = .1
-    cardFlip.play()
     setMessage('WAR has begun!')
     setTimeout(displayWarDrawCard, 400)
     setTimeout(displayWarDrawCard, 800)
@@ -193,10 +191,11 @@ function war (){
     setMessage('You must fight again!')
     updateScore()
   }
-  clearDisplayWarDrawCards()
 }
 
 function displayWarDrawCard(){
+  cardFlip.volume = .1
+  cardFlip.play()
   let playerNewWarCard1 = document.createElement('div')
   playerNewWarCard1.className = 'card large back-blue'
   playerWarDraw.appendChild(playerNewWarCard1)
@@ -204,7 +203,6 @@ function displayWarDrawCard(){
   computerNewWarCard1.className = 'card large back-red'
   computerWarDraw.appendChild(computerNewWarCard1)
 }
-
 
 function updateScore(){
   playerScoreTotal = playerWinsPile.length + playerHand.length
