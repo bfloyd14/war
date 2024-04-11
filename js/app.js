@@ -160,7 +160,12 @@ function compareCards(){
     setTimeout(war, 1600)
     
   }
-  console.log(playerHand, playerWinsPile, computerHand, computerWinsPile)
+  // console.log(playerHand)
+  console.log(playerCard)
+  // console.log(playerWinsPile)
+  // console.log(computerHand) 
+  console.log(computerCard)
+  // console.log(computerWinsPile)
 }
 
 function war (){
@@ -182,7 +187,7 @@ function war (){
     setMessage('The Player has won this battle!')
     updateScore()
   } else if(checkCardVal(playerWarCards[3]) < checkCardVal(computerWarCards[3])){
-    computerWinsPile.push(...playerWarCards, ...computerWarCards, playerCard, computerCard)
+    computerWinsPile.push(...playerWarCards, ...computerWarCards, playerCard,computerCard)
     setMessage('The Computer has won this battle!')
     updateScore()
   } else{

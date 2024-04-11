@@ -11,10 +11,8 @@ body {
 nav {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  /* align-items: center; */
   background-color: rgb(203, 187, 136);
   width: 100%;
-  /* justify-content: space-between; */
   border-radius: 10px;
 }
 
@@ -73,7 +71,6 @@ h1 {
   justify-content: center;
   align-items: center;
   width: 100%;
-  /* padding: 40px 0 0 0;  */
 }
 
 .button-container {
@@ -111,14 +108,14 @@ h1 {
 
 #computer-score{
   border-radius: 6px;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: bold;
   background-color: rgb(240, 75, 75, 0.65);
 }
 
 #player-score {
   border-radius: 6px;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: bold;
   background-color: rgb(97, 97, 247, 0.65 );
 }
